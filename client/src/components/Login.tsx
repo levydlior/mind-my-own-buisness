@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 type loginProps = {
     onLogin: CallableFunction
-
 }
 
 function Login({ onLogin }: loginProps) {
@@ -42,7 +41,7 @@ function Login({ onLogin }: loginProps) {
                         username: '',
                         password: ''
                     })
-                    console.log(err)
+                    setErrors(err)
                 })
             }
         })

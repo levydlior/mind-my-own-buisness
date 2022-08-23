@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Link, Route, Switch, useHistory } from "react-router-dom";
 import CreateAnAccount from './components/CreateAnAccount';
 import Login from './components/Login';
 
@@ -8,7 +8,7 @@ import Login from './components/Login';
 function App() {
 
 
-  const [loggedUser, setLoggedUser] = useState<any | null>(null);
+  const [loggedUser, setLoggedUser] = useState<object | null>(null);
   const [authorized, setAuthorized] = useState(false)
 
 
@@ -27,8 +27,9 @@ function App() {
     })
   }, [])
 
-  function onLoginOrCreate(user: object){
+  function onLoginOrCreate(user: object) {
     setLoggedUser(user)
+    setAuthorized(true)
     console.log(user)
     setTimeout(() => {
       setLoggedUser(user);
@@ -36,24 +37,54 @@ function App() {
     }, 1500);
   }
 
+  function handleLogOut(e: React.SyntheticEvent) {
+    e.preventDefault()
+    fetch('/logout', {
+      method: 'DELETE'
+    }).then(r => {
+      if (r.ok) {
+        setLoggedUser(null)
+        history.push('/')
+      }
+    })
+  }
+
+  if (!authorized){
+    return <div></div>
+  }
+
   return (
     <div className="App">
 
-      <header>header</header>
+      <header>
+        {loggedUser
+          ? <Link to='/' onClick={handleLogOut}>Log out</Link>
+          : <h2>hi</h2>
+        }
+
+      </header>
       {!loggedUser ?
         <Switch>
           <Route exact path='/'>
-            <CreateAnAccount />
+            <CreateAnAccount onCreate={onLoginOrCreate} />
           </Route>
           <Route exact path='/login'>
-            <Login onLogin={onLoginOrCreate}/>
+            <Login onLogin={onLoginOrCreate} />
           </Route>
-
+          <Route exact path="*">
+              <h1>404 not found</h1>
+            </Route>
         </Switch>
         : <Switch>
-          <Route exact path='/'>
-
+          <Route path='bla'>
+            <h2>bla</h2>
           </Route>
+          <Route exact path='/'>
+          <h2>logged</h2>
+          </Route>
+          <Route exact path="*">
+              <h1>404 not found</h1>
+            </Route>
         </Switch>
       }
 
