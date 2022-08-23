@@ -1,3 +1,2 @@
 class BusinessesController < ApplicationController
-    
 end
