@@ -31,10 +31,8 @@ function App() {
     setLoggedUser(user)
     setAuthorized(true)
     console.log(user)
-    setTimeout(() => {
-      setLoggedUser(user);
       history.push("/");
-    }, 1500);
+      setLoggedUser(user);
   }
 
   function handleLogOut(e: React.SyntheticEvent) {
@@ -49,7 +47,7 @@ function App() {
     })
   }
 
-  if (!authorized){
+  if (!authorized) {
     return <div></div>
   }
 
@@ -68,23 +66,26 @@ function App() {
           <Route exact path='/'>
             <CreateAnAccount onCreate={onLoginOrCreate} />
           </Route>
+          <Route exact path='/create-account'>
+            <CreateAnAccount onCreate={onLoginOrCreate} />
+          </Route>
           <Route exact path='/login'>
             <Login onLogin={onLoginOrCreate} />
           </Route>
           <Route exact path="*">
-              <h1>404 not found</h1>
-            </Route>
+            <h1>404 not found</h1>
+          </Route>
         </Switch>
         : <Switch>
           <Route path='bla'>
             <h2>bla</h2>
           </Route>
           <Route exact path='/'>
-          <h2>logged</h2>
+            <h2>logged</h2>
           </Route>
           <Route exact path="*">
-              <h1>404 not found</h1>
-            </Route>
+            <h1>404 not found</h1>
+          </Route>
         </Switch>
       }
 

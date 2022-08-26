@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 type loginProps = {
     onLogin: CallableFunction
+}
+
+interface ErrorType {
+    error: String
 }
 
 function Login({ onLogin }: loginProps) {
@@ -10,14 +15,17 @@ function Login({ onLogin }: loginProps) {
         username: '',
         password: ''
     })
-    const [errors, setErrors] = useState(null);
-
+    const [errors, setErrors] = useState<ErrorType[]>([])
 
     function handleChange(e: any) {
         const target: string = e.target.name
         const value: string = e.target.value
 
         setLoginForm({ ...loginForm, [target]: value })
+    }
+
+    if (errors) {
+        console.log(errors)
     }
 
     function handleLoginSubmit(e: React.SyntheticEvent) {
@@ -33,7 +41,10 @@ function Login({ onLogin }: loginProps) {
         }).then(r => {
             if (r.ok) {
                 r.json().then(
-                    user => onLogin(user)
+                    user => {
+                        onLogin(user)
+                        setErrors([])
+                    }
                 )
             } else {
                 r.json().then(err => {
@@ -41,11 +52,13 @@ function Login({ onLogin }: loginProps) {
                         username: '',
                         password: ''
                     })
-                    setErrors(err)
+                    setErrors([err])
                 })
             }
         })
     }
+
+
 
     return (
         <div>
@@ -53,7 +66,9 @@ function Login({ onLogin }: loginProps) {
                 <input name='username' type='text' required value={loginForm.username} onChange={handleChange} />
                 <input name='password' type='password' required value={loginForm.password} onChange={handleChange} />
                 <input type='submit' value='Login' />
+                {errors ? errors.map(err => <p>{err.error}</p>) : null}
             </form>
+            <Link to='/create-account'>Don't have an account</Link>
         </div>
     )
 }
