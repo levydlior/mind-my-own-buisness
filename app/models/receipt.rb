@@ -1,3 +1,3 @@
 class Receipt < ApplicationRecord
-  belongs_to :buisness
+  belongs_to :business
 end
