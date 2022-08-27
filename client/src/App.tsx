@@ -3,6 +3,7 @@ import './App.css';
 import { Link, Route, Switch, useHistory } from "react-router-dom";
 import CreateAnAccount from './components/CreateAnAccount';
 import Login from './components/Login';
+import MainContent from './components/MainContent';
 
 
 function App() {
@@ -77,11 +78,8 @@ function App() {
           </Route>
         </Switch>
         : <Switch>
-          <Route path='bla'>
-            <h2>bla</h2>
-          </Route>
           <Route exact path='/'>
-            <h2>logged</h2>
+            <MainContent /> 
           </Route>
           <Route exact path="*">
             <h1>404 not found</h1>
