@@ -25,7 +25,6 @@ function Login({ onLogin }: loginProps) {
     }
 
     if (errors) {
-        console.log(errors)
     }
 
     function handleLoginSubmit(e: React.SyntheticEvent) {
