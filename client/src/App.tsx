@@ -78,8 +78,11 @@ function App() {
           </Route>
         </Switch>
         : <Switch>
-          <Route exact path='/'>
+          <Route  path='/businesses'>
             <MainContent /> 
+          </Route>
+          <Route exact path='/'>
+            <h2>hi</h2>
           </Route>
           <Route exact path="*">
             <h1>404 not found</h1>
