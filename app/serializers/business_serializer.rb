@@ -1,5 +1,3 @@
 class BusinessSerializer < ActiveModel::Serializer
-  attributes :id, :name, :receipts
-  has_one :user
-  has_many :receipts
+  attributes :id, :name
 end
