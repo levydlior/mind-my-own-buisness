@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 
-function CreateNewBusiness(loggedUser) {
-  const id = loggedUser.loggedUser.loggedUser.loggedUser.id;
-
+function CreateNewBusiness({
+  loggedUser,
+  active,
+  handleActiveChange,
+  onAddBusiness,
+}) {
+  const id = loggedUser.id;
   const [businessForm, setBusinessForm] = useState({
     name: "",
     user_id: id,
   });
-  const [active, setActive] = useState(false);
   const [error, setError] = useState(null);
+
+  const initialForm = {
+    name: "",
+    user_id: id,
+  };
 
   function handleChange(e) {
     const target = e.target.name;
@@ -31,22 +39,27 @@ function CreateNewBusiness(loggedUser) {
       if (r.ok) {
         r.json().then((business) => {
           setError(null);
-          console.log(business);
-          setBusinessForm({
-            name: "",
-            user_id: id,
-          });
+          onAddBusiness(business);
+          setBusinessForm(initialForm);
         });
       } else {
-        r.json().then((error) => setError(error));
+        r.json().then((error) => {
+          setError(error);
+          setBusinessForm(initialForm);
+        });
       }
     });
+  }
+
+  function handleClick() {
+    handleActiveChange(false);
+    setBusinessForm(initialForm);
   }
 
   return (
     <div>
       {!active ? (
-        <button onClick={() => setActive(true)}>Add a Business</button>
+        <button onClick={() => handleActiveChange(true)}>Add a Business</button>
       ) : (
         <form onSubmit={handleSubmit}>
           <input
@@ -58,7 +71,7 @@ function CreateNewBusiness(loggedUser) {
           />
           {error ? <p>{error.errors[0]}</p> : null}
           <input type="submit" value="Add" />
-          <button onClick={() => setActive(false)}>Cancel</button>
+          <button onClick={handleClick}>Cancel</button>
         </form>
       )}
     </div>

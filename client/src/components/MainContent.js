@@ -3,7 +3,7 @@ import { Route, useRouteMatch } from "react-router";
 import BusinessList from "./BusinessList";
 import Business from "./Business";
 
-function MainContent(loggedUser) {
+function MainContent({loggedUser}) {
   const match = useRouteMatch();
 
   return (
