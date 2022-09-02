@@ -9,7 +9,7 @@ import MainContent from './components/MainContent';
 function App() {
 
 
-  const [loggedUser, setLoggedUser] = useState<object | null>(null);
+  const [loggedUser, setLoggedUser] = useState(null);
   const [authorized, setAuthorized] = useState(false)
 
 
@@ -28,7 +28,7 @@ function App() {
     })
   }, [])
 
-  function onLoginOrCreate(user: object) {
+  function onLoginOrCreate(user) {
     setLoggedUser(user)
     setAuthorized(true)
     console.log(user)
@@ -36,7 +36,7 @@ function App() {
       setLoggedUser(user);
   }
 
-  function handleLogOut(e: React.SyntheticEvent) {
+  function handleLogOut(e) {
     e.preventDefault()
     fetch('/logout', {
       method: 'DELETE'
@@ -79,7 +79,7 @@ function App() {
         </Switch>
         : <Switch>
           <Route  path='/businesses'>
-            <MainContent /> 
+            <MainContent loggedUser={loggedUser} /> 
           </Route>
           <Route exact path='/'>
             <h2>hi</h2>
