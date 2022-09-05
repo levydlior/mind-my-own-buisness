@@ -20,7 +20,7 @@ class BusinessesController < ApplicationController
     def destroy
         business = Business.find(params[:id])
         business.destroy
-        render json: business
+        render json: business, status: :ok
     end
 
 

@@ -25,9 +25,14 @@ function BusinessList({ loggedUser }) {
     setActive(false);
   }
 
+  function handleDelete(business){
+    const newBusinessArray = businesses.filter(busi => busi.id !== business.id)
+    setBusinesses(newBusinessArray)
+  }
+
   const businessList = businesses.map((business) => {
     return (
-      <BusinessCard business={business} onHandleLinkClick={handleLinkClick}/>
+      <BusinessCard business={business} onHandleLinkClick={handleLinkClick} onDelete={handleDelete} key={business.id}/>
     );
   });
 
