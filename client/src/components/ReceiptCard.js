@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Receipt(receipt) {
+function ReceiptCard(receipt) {
   return (
     <div>
       <h2>{receipt.receipt.name}</h2>
@@ -10,4 +10,4 @@ function Receipt(receipt) {
   )
 }
 
-export default Receipt
+export default ReceiptCard

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Receipt from "./Receipt";
+import ReceiptCard from "./ReceiptCard";
 
-function Business() {
+function Receipts() {
   const [receipts, setReceipts] = useState([]);
 
   const params = useParams();
@@ -15,7 +15,7 @@ function Business() {
   }, [params]);
 
   const receiptsList = receipts.map((receipt) => (
-    <Receipt key={receipt.name} receipt={receipt} />
+    <ReceiptCard key={receipt.name} receipt={receipt} />
   ));
 
   // console.log(receipts);
@@ -27,4 +27,4 @@ function Business() {
   );
 }
 
-export default Business;
+export default Receipts;

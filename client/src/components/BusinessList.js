@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import BusinessCard from "../BusinessCard";
 import CreateNewBusiness from "./CreateNewBusiness";
 
 function BusinessList({ loggedUser }) {
@@ -27,17 +27,15 @@ function BusinessList({ loggedUser }) {
 
   const businessList = businesses.map((business) => {
     return (
-      <li key={business.id}>
-        <Link to={`/businesses/${business.id}`} onClick={handleLinkClick}>
-          {business.name}
-        </Link>
-      </li>
+      <BusinessCard business={business} onHandleLinkClick={handleLinkClick}/>
     );
   });
 
   return (
     <div>
+      <ul>
       {businessList}
+      </ul>
       <CreateNewBusiness
         loggedUser={loggedUser}
         active={active}

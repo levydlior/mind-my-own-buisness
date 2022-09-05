@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, useRouteMatch } from "react-router";
 import BusinessList from "./BusinessList";
-import Business from "./Business";
+import Receipts from "./Business";
 
 function MainContent({loggedUser}) {
   const match = useRouteMatch();
@@ -10,7 +10,7 @@ function MainContent({loggedUser}) {
     <div>
       <BusinessList loggedUser={loggedUser} />
       <Route path={`${match.url}/:businessId`}>
-        <Business  />
+        <Receipts  />
       </Route>
     </div>
   );
