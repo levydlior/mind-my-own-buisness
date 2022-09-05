@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BusinessCard from "../BusinessCard";
 import CreateNewBusiness from "./CreateNewBusiness";
 
-function BusinessList({ loggedUser }) {
+function BusinessList({ loggedUser, onLinkClick }) {
   const [businesses, setBusinesses] = useState([]);
   const [active, setActive] = useState(false);
 
@@ -18,6 +18,7 @@ function BusinessList({ loggedUser }) {
 
   function handleLinkClick() {
     setActive(false);
+    onLinkClick(false)
   }
 
   function handleAddBusiness(business) {
@@ -25,22 +26,27 @@ function BusinessList({ loggedUser }) {
     setActive(false);
   }
 
-  function handleDelete(business){
-    const newBusinessArray = businesses.filter(busi => busi.id !== business.id)
-    setBusinesses(newBusinessArray)
+  function handleDelete(business) {
+    const newBusinessArray = businesses.filter(
+      (busi) => busi.id !== business.id
+    );
+    setBusinesses(newBusinessArray);
   }
 
   const businessList = businesses.map((business) => {
     return (
-      <BusinessCard business={business} onHandleLinkClick={handleLinkClick} onDelete={handleDelete} key={business.id}/>
+      <BusinessCard
+        business={business}
+        onHandleLinkClick={handleLinkClick}
+        onDelete={handleDelete}
+        key={business.id}
+      />
     );
   });
 
   return (
     <div>
-      <ul>
-      {businessList}
-      </ul>
+      <ul>{businessList}</ul>
       <CreateNewBusiness
         loggedUser={loggedUser}
         active={active}
