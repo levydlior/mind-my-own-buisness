@@ -31,8 +31,14 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
     setReceiptForm({ ...receiptForm, business_id: businessId });
   }, [params]);
 
+  function handleReceiptDelete(id){
+    console.log(id)
+    const updatedReceipts = receipts.filter(receipt => receipt.id !== id )
+    setReceipts(updatedReceipts)
+  }
+
   const receiptsList = receipts.map((receipt) => (
-    <ReceiptCard key={receipt.name} receipt={receipt} />
+    <ReceiptCard key={receipt.name} receipt={receipt} onReceiptDelete={handleReceiptDelete} />
   ));
 
   function handleChange(e) {
@@ -58,7 +64,7 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
           setError(null);
           setReceiptForm(originalForm);
           setReceipts([...receipts, rec]);
-          onCreateReceipts(false)
+          onCreateReceipts(false);
         });
       } else {
         r.json().then((err) => {
@@ -68,11 +74,12 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
       }
     });
   }
-  console.log(receipts);
+
+
+
   return (
     <div>
       <button onClick={() => onCreateReceipts(true)}>Add Receipt</button>
-      <button onClick={() => onCreateReceipts(false)}>Cancel</button>
       {createReceiptsActive ? (
         <form onSubmit={handleSubmit}>
           <input
@@ -101,6 +108,7 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
             onChange={handleChange}
           />
           <input type="submit" value="Add Receipt" />
+          <button onClick={() => onCreateReceipts(false)}>Cancel</button>
         </form>
       ) : null}
 
