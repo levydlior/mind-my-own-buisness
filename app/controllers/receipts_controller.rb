@@ -12,6 +12,12 @@ class ReceiptsController < ApplicationController
         render json: receipt, status: :created
     end
 
+    def destroy
+        receipt = Receipt.find(params[:id])
+        receipt.destroy
+        head :no_content
+    end
+
     private
 
         def receipt_params
