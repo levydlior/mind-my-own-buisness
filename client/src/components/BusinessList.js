@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import BusinessCard from "../BusinessCard";
 import CreateNewBusiness from "./CreateNewBusiness";
 
 function BusinessList({ loggedUser, onLinkClick }) {
   const [businesses, setBusinesses] = useState([]);
   const [active, setActive] = useState(false);
+
+  const history = useHistory()
 
   useEffect(() => {
     fetch("/businesses")
@@ -30,7 +33,9 @@ function BusinessList({ loggedUser, onLinkClick }) {
     const newBusinessArray = businesses.filter(
       (busi) => busi.id !== business.id
     );
+
     setBusinesses(newBusinessArray);
+    history.push('/businesses')
   }
 
   const businessList = businesses.map((business) => {

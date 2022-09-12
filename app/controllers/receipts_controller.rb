@@ -1,5 +1,6 @@
 class ReceiptsController < ApplicationController
 
+
     def show
         business = Business.find(params[:id])
         receipts = business.receipts.all
@@ -7,7 +8,7 @@ class ReceiptsController < ApplicationController
     end
 
     def create
-        receipt = Receipt.create(receipt_params)
+        receipt = Receipt.create!(receipt_params)
         render json: receipt, status: :created
     end
 
@@ -16,7 +17,5 @@ class ReceiptsController < ApplicationController
         def receipt_params
             params.permit(:name, :amount, :image, :business_id)
         end
-
-    end
 
 end
