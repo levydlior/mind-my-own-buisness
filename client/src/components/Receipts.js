@@ -9,6 +9,7 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
   const [error, setError] = useState([]);
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
+  const [uploading, setUploading] = useState(false)
 
   const params = useParams();
   const { businessId } = params;
@@ -31,7 +32,7 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
     if (!file) {
       alert("Please choose a file first!");
     }
-
+    setUploading(true)
     const storageRef = ref(storage, `/files/${receiptForm.name}/${Date.now()}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -89,7 +90,7 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
   }
 
   useEffect(() => {
-    if (receiptForm.image)
+    if (receiptForm.image){
       fetch("/receipts", {
         method: "POST",
         headers: {
@@ -104,21 +105,26 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
             setReceiptForm(originalForm);
             setReceipts([...receipts, rec]);
             onCreateReceipts(false);
+            setUploading(false)
           });
         } else {
           r.json().then((err) => {
+            setUploading(false)
             setReceiptForm(originalForm);
             setError(err.errors[0]);
           });
         }
-      });
+      })}
   }, [receiptForm.image]);
 
   function handleSubmit(e) {
     e.preventDefault();
     handleUpload();
   }
-  console.log("receipt form:", receiptForm);
+
+  console.log(uploading)
+
+
   return (
     <div>
       <button onClick={() => onCreateReceipts(true)}>Add Receipt</button>
@@ -153,8 +159,10 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
           <button onClick={() => onCreateReceipts(false)}>Cancel</button>
         </form>
       ) : null}
-
+ {uploading? <p>Uploading!</p>
+      :  <>
       {receiptsList}
+      </>} 
     </div>
   );
 }
