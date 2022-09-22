@@ -30,9 +30,11 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
 
   async function handleUpload() {
     if (!file) {
-      alert("Please choose a file first!");
+      setError('Please add an image')
+      return
     }
     setUploading(true)
+
     const storageRef = ref(storage, `/files/${receiptForm.name}/${Date.now()}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -46,11 +48,10 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
         // update progress
         setPercent(percent);
       },
-      (err) => console.log(err),
+      (err) => setError(err),
       () => {
         // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url);
           setReceiptForm({ ...receiptForm, image: url });
         });
       }
@@ -122,7 +123,6 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
     handleUpload();
   }
 
-  console.log(uploading)
 
 
   return (
