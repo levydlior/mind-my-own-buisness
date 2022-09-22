@@ -1,7 +1,6 @@
 import React from "react";
 
 function ReceiptCard({ receipt, onReceiptDelete }) {
- 
   function handleClick() {
     fetch(`/receipts/${receipt.id}`, {
       method: "DELETE",

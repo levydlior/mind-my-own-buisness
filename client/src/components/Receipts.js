@@ -1,27 +1,60 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import ReceiptCard from "./ReceiptCard";
+import storage from "./../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 function Receipts({ onCreateReceipts, createReceiptsActive }) {
   const [receipts, setReceipts] = useState([]);
   const [error, setError] = useState([]);
+  const [file, setFile] = useState("");
+  const [percent, setPercent] = useState(0);
 
   const params = useParams();
   const { businessId } = params;
 
   const [receiptForm, setReceiptForm] = useState({
     name: "",
-    amount: 0,
+    amount: "",
     image: "",
     business_id: businessId,
   });
 
   const originalForm = {
     name: "",
-    amount: 0,
+    amount: "",
     image: "",
     business_id: businessId,
   };
+
+  async function handleUpload() {
+    if (!file) {
+      alert("Please choose a file first!");
+    }
+
+    const storageRef = ref(storage, `/files/${receiptForm.name}/${Date.now()}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+
+        // update progress
+        setPercent(percent);
+      },
+      (err) => console.log(err),
+      () => {
+        // download url
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log(url);
+          setReceiptForm({ ...receiptForm, image: url });
+        });
+      }
+    );
+  }
 
   useEffect(() => {
     fetch(`/receipts/${businessId}`)
@@ -31,14 +64,17 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
     setReceiptForm({ ...receiptForm, business_id: businessId });
   }, [params]);
 
-  function handleReceiptDelete(id){
-    console.log(id)
-    const updatedReceipts = receipts.filter(receipt => receipt.id !== id )
-    setReceipts(updatedReceipts)
+  function handleReceiptDelete(id) {
+    const updatedReceipts = receipts.filter((receipt) => receipt.id !== id);
+    setReceipts(updatedReceipts);
   }
 
   const receiptsList = receipts.map((receipt) => (
-    <ReceiptCard key={receipt.name} receipt={receipt} onReceiptDelete={handleReceiptDelete} />
+    <ReceiptCard
+      key={receipt.name}
+      receipt={receipt}
+      onReceiptDelete={handleReceiptDelete}
+    />
   ));
 
   function handleChange(e) {
@@ -48,35 +84,41 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
     setReceiptForm({ ...receiptForm, [target]: value });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    fetch("/receipts", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        accept: "application/json",
-      },
-      body: JSON.stringify(receiptForm),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((rec) => {
-          setError(null);
-          setReceiptForm(originalForm);
-          setReceipts([...receipts, rec]);
-          onCreateReceipts(false);
-        });
-      } else {
-        r.json().then((err) => {
-          setReceiptForm(originalForm);
-          setError(err.errors[0]);
-        });
-      }
-    });
+  function handleImageChange(e) {
+    setFile(e.target.files[0]);
   }
 
+  useEffect(() => {
+    if (receiptForm.image)
+      fetch("/receipts", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify(receiptForm),
+      }).then((r) => {
+        if (r.ok) {
+          r.json().then((rec) => {
+            setError(null);
+            setReceiptForm(originalForm);
+            setReceipts([...receipts, rec]);
+            onCreateReceipts(false);
+          });
+        } else {
+          r.json().then((err) => {
+            setReceiptForm(originalForm);
+            setError(err.errors[0]);
+          });
+        }
+      });
+  }, [receiptForm.image]);
 
-
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleUpload();
+  }
+  console.log("receipt form:", receiptForm);
   return (
     <div>
       <button onClick={() => onCreateReceipts(true)}>Add Receipt</button>
@@ -101,11 +143,11 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
           />
           <input
             name="image"
-            type="text"
+            type="file"
             required
             placeholder="image"
-            value={receiptForm.image}
-            onChange={handleChange}
+            onChange={handleImageChange}
+            accept="image"
           />
           <input type="submit" value="Add Receipt" />
           <button onClick={() => onCreateReceipts(false)}>Cancel</button>
