@@ -3,19 +3,32 @@ import { Route, useRouteMatch } from "react-router";
 import BusinessList from "./BusinessList";
 import Receipts from "./Receipts";
 
-function MainContent({loggedUser}) {
+function MainContent({ loggedUser }) {
   const match = useRouteMatch();
-  const [createReceiptsActive, setCreateReceiptsActive] = useState(false)
+  const [createReceiptsActive, setCreateReceiptsActive] = useState(false);
+  const [newReceipt, setNewReceipt] = useState(null);
 
-  function handleLinkClick(value){
-    setCreateReceiptsActive(value)
+  function handleLinkClick(value) {
+    setCreateReceiptsActive(value);
   }
 
+  function handleNewReceipts(res) {
+    setNewReceipt(res);
+  }
+  
   return (
     <div>
-      <BusinessList loggedUser={loggedUser} onLinkClick={handleLinkClick} />
+      <BusinessList
+        loggedUser={loggedUser}
+        onLinkClick={handleLinkClick}
+        newReceipt={newReceipt}
+      />
       <Route path={`${match.url}/:businessId`}>
-        <Receipts createReceiptsActive={createReceiptsActive} onCreateReceipts={handleLinkClick} />
+        <Receipts
+          createReceiptsActive={createReceiptsActive}
+          onCreateReceipts={handleLinkClick}
+          onNewReceipts={handleNewReceipts}
+        />
       </Route>
     </div>
   );

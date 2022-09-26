@@ -3,25 +3,27 @@ import { useHistory } from "react-router";
 import BusinessCard from "../BusinessCard";
 import CreateNewBusiness from "./CreateNewBusiness";
 
-function BusinessList({ loggedUser, onLinkClick }) {
+function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
   const [businesses, setBusinesses] = useState([]);
   const [active, setActive] = useState(false);
 
-  const history = useHistory()
-
+  const history = useHistory();
   useEffect(() => {
     fetch("/businesses")
       .then((r) => r.json())
-      .then((arrayOfBusinesses) => setBusinesses(arrayOfBusinesses));
-  }, []);
-
+      .then((arrayOfBusinesses) => {
+        setBusinesses(arrayOfBusinesses);
+        console.log("fetched");
+      });
+  }, [newReceipt]);
+  
   function handleActiveChange(value) {
     setActive(value);
   }
 
   function handleLinkClick() {
     setActive(false);
-    onLinkClick(false)
+    onLinkClick(false);
   }
 
   function handleAddBusiness(business) {
@@ -35,7 +37,7 @@ function BusinessList({ loggedUser, onLinkClick }) {
     );
 
     setBusinesses(newBusinessArray);
-    history.push('/businesses')
+    history.push("/businesses");
   }
 
   const businessList = businesses.map((business) => {

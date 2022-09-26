@@ -4,12 +4,12 @@ import ReceiptCard from "./ReceiptCard";
 import storage from "./../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-function Receipts({ onCreateReceipts, createReceiptsActive }) {
+function Receipts({ onCreateReceipts, createReceiptsActive, onNewReceipts }) {
   const [receipts, setReceipts] = useState([]);
   const [error, setError] = useState([]);
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
-  const [uploading, setUploading] = useState(false)
+  const [uploading, setUploading] = useState(false);
 
   const params = useParams();
   const { businessId } = params;
@@ -30,10 +30,10 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
 
   async function handleUpload() {
     if (!file) {
-      setError('Please add an image')
-      return
+      setError("Please add an image");
+      return;
     }
-    setUploading(true)
+    setUploading(true);
 
     const storageRef = ref(storage, `/files/${receiptForm.name}/${Date.now()}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -91,7 +91,7 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
   }
 
   useEffect(() => {
-    if (receiptForm.image){
+    if (receiptForm.image) {
       fetch("/receipts", {
         method: "POST",
         headers: {
@@ -106,24 +106,24 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
             setReceiptForm(originalForm);
             setReceipts([...receipts, rec]);
             onCreateReceipts(false);
-            setUploading(false)
+            setUploading(false);
+            onNewReceipts(rec);
           });
         } else {
           r.json().then((err) => {
-            setUploading(false)
+            setUploading(false);
             setReceiptForm(originalForm);
             setError(err.errors[0]);
           });
         }
-      })}
+      });
+    }
   }, [receiptForm.image]);
 
   function handleSubmit(e) {
     e.preventDefault();
     handleUpload();
   }
-
-
 
   return (
     <div>
@@ -159,10 +159,7 @@ function Receipts({ onCreateReceipts, createReceiptsActive }) {
           <button onClick={() => onCreateReceipts(false)}>Cancel</button>
         </form>
       ) : null}
- {uploading? <p>Uploading!</p>
-      :  <>
-      {receiptsList}
-      </>} 
+      {uploading ? <p>Uploading!</p> : <>{receiptsList}</>}
     </div>
   );
 }
