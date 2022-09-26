@@ -1,15 +1,27 @@
-import React from "react";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 function ReceiptCard({ receipt, onReceiptDelete }) {
+  const storage = getStorage();
+  const desertRef = ref(storage, `${receipt.image}`);
   function handleClick() {
-    fetch(`/receipts/${receipt.id}`, {
-      method: "DELETE",
-    }).then((r) => {
-      if (r.ok) {
-        onReceiptDelete(receipt.id)
-      }
-    });
+    deleteObject(desertRef)
+      .then(() => {
+        // File deleted successfully
+        console.log("done");
+        fetch(`/receipts/${receipt.id}`, {
+          method: "DELETE",
+        }).then((r) => {
+          if (r.ok) {
+            onReceiptDelete(receipt.id);
+          }
+        });
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+        console.log(error);
+      });
   }
+
   return (
     <div>
       <h2>{receipt.name}</h2>

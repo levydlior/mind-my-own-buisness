@@ -31,7 +31,6 @@ function App() {
   function onLoginOrCreate(user) {
     setLoggedUser(user)
     setAuthorized(true)
-    console.log(user)
       history.push("/");
       setLoggedUser(user);
   }
@@ -52,6 +51,8 @@ function App() {
     return <div></div>
   }
 
+
+
   return (
     <div className="App">
 
@@ -60,7 +61,6 @@ function App() {
           ? <Link to='/' onClick={handleLogOut}>Log out</Link>
           : <h2>hi</h2>
         }
-
       </header>
       {!loggedUser ?
         <Switch>
@@ -82,7 +82,8 @@ function App() {
             <MainContent loggedUser={loggedUser} /> 
           </Route>
           <Route exact path='/'>
-            <h2>hi</h2>
+            <h2>hi {loggedUser.username}</h2>
+            <Link to='/businesses'>Your businesses</Link>
           </Route>
           <Route exact path="*">
             <h1>404 not found</h1>
