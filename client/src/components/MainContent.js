@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Route, useRouteMatch } from "react-router";
 import BusinessList from "./BusinessList";
 import Receipts from "./Receipts";

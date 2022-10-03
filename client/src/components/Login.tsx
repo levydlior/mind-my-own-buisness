@@ -1,5 +1,23 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import styled from "@emotion/styled";
+
+const LoginDiv = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 2rem;
+`
+
+const LoginForm = styled.form`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: 8rem;
+align-items: center;
+margin: 2rem;
+`
 
 type loginProps = {
     onLogin: CallableFunction
@@ -57,18 +75,17 @@ function Login({ onLogin }: loginProps) {
         })
     }
 
-
-
     return (
-        <div>
-            <form onSubmit={handleLoginSubmit}>
+        <LoginDiv>
+            <h2>Login:</h2>
+            <LoginForm onSubmit={handleLoginSubmit}>
                 <input name='username' type='text' required value={loginForm.username} onChange={handleChange} />
                 <input name='password' type='password' required value={loginForm.password} onChange={handleChange} />
                 <input type='submit' value='Login' />
                 {errors ? errors.map(err => <p>{err.error}</p>) : null}
-            </form>
+            </LoginForm>
             <Link to='/create-account'>Don't have an account</Link>
-        </div>
+        </LoginDiv>
     )
 }
 

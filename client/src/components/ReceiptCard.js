@@ -1,5 +1,6 @@
 import { getStorage, ref, deleteObject } from "firebase/storage";
-import styled from 'styled-components'
+// import styled from 'styled-components'
+import styled from "@emotion/styled";
 
 const Image = styled.img`
 width: 35rem;
@@ -12,8 +13,6 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-
-
 `
 
 function ReceiptCard({ receipt, onReceiptDelete }) {

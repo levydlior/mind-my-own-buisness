@@ -4,7 +4,7 @@ import { Link, Route, Switch, useHistory } from "react-router-dom";
 import CreateAnAccount from "./components/CreateAnAccount";
 import Login from "./components/Login";
 import MainContent from "./components/MainContent";
-import styled from 'styled-components'
+import styled from "@emotion/styled";
 
 
 const Header = styled.header`

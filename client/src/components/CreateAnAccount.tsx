@@ -1,6 +1,23 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import styled from "@emotion/styled";
 
+const AccountDiv = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 2rem;
+`
+
+const CreateForm = styled.form`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: 8rem;
+align-items: center;
+margin: 2rem;
+`
 
 type createProps = {
   onCreate: CallableFunction
@@ -52,7 +69,6 @@ function CreateAnAccount({ onCreate }: createProps) {
     })
   }
 
-console.log(errors)
   function specificError(text: string) {
     let er;
     errors.forEach((error: any) => {
@@ -68,20 +84,19 @@ console.log(errors)
     }
   }
 
-
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <AccountDiv>
+      <h2>Create An Account:</h2>
+      <CreateForm onSubmit={handleSubmit}>
         <input name='username' type='text' required placeholder='username' value={createAccountForm.username} onChange={handleChange} />
         {specificError('Username has already been taken')}
         <input name='password' type='password' required placeholder='password' value={createAccountForm.password} onChange={handleChange} />
         <input name='email' type='text' required placeholder='email' value={createAccountForm.email} onChange={handleChange} />
         {specificError('Email has already been taken')}
         <input type='submit' value='create account' />
-      </form>
+      </CreateForm>
       <Link to='/login'>Already have an account</Link >
-    </div>
+    </AccountDiv>
   )
 }
 
