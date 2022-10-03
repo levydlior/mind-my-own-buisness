@@ -1,4 +1,20 @@
 import { getStorage, ref, deleteObject } from "firebase/storage";
+import styled from 'styled-components'
+
+const Image = styled.img`
+width: 35rem;
+height: 34rem;
+
+`
+
+const ReceiptDiv = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+
+`
 
 function ReceiptCard({ receipt, onReceiptDelete }) {
   const storage = getStorage();
@@ -23,12 +39,12 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
   }
 
   return (
-    <div>
+    <ReceiptDiv>
       <h2>{receipt.name}</h2>
-      <img src={receipt.image} alt="receipt image" />
+      <Image src={receipt.image} alt="receipt image" />
       <button onClick={handleClick}>Delete</button>
       <h3>Amount: {receipt.amount}</h3>
-    </div>
+    </ReceiptDiv>
   );
 }
 

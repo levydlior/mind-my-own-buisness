@@ -4,6 +4,8 @@ import ReceiptCard from "./ReceiptCard";
 import storage from "./../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+
+
 function Receipts({ onCreateReceipts, createReceiptsActive, onNewReceipts }) {
   const [receipts, setReceipts] = useState([]);
   const [error, setError] = useState([]);

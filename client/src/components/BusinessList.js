@@ -16,7 +16,7 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
         console.log("fetched");
       });
   }, [newReceipt]);
-  
+
   function handleActiveChange(value) {
     setActive(value);
   }
@@ -53,13 +53,13 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
 
   return (
     <div>
-      <ul>{businessList}</ul>
       <CreateNewBusiness
         loggedUser={loggedUser}
         active={active}
         handleActiveChange={handleActiveChange}
         onAddBusiness={handleAddBusiness}
       />
+      <ul>{businessList}</ul>
     </div>
   );
 }
