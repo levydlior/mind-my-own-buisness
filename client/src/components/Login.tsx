@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from "@emotion/styled";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 
 const LoginDiv = styled.div`
 display: flex;
@@ -14,7 +17,7 @@ const LoginForm = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-height: 8rem;
+height: 12rem;
 align-items: center;
 margin: 2rem;
 `
@@ -79,9 +82,9 @@ function Login({ onLogin }: loginProps) {
         <LoginDiv>
             <h2>Login:</h2>
             <LoginForm onSubmit={handleLoginSubmit}>
-                <input name='username' type='text' required value={loginForm.username} onChange={handleChange} />
-                <input name='password' type='password' required value={loginForm.password} onChange={handleChange} />
-                <input type='submit' value='Login' />
+            <TextField id="outlined-basic" label="Username" variant="outlined" name='username' type='text' required value={loginForm.username} onChange={handleChange}/>
+            <TextField name='password' type='password' required id="outlined-basic" label="Password" variant="outlined"  value={loginForm.password} onChange={handleChange} />
+            <Button type='submit' variant="contained">Login</Button>
                 {errors ? errors.map(err => <p>{err.error}</p>) : null}
             </LoginForm>
             <Link to='/create-account'>Don't have an account</Link>

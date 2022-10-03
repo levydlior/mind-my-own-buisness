@@ -17,7 +17,7 @@ const CreateForm = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-height: 15rem;
+height: 22rem;
 align-items: center;
 margin: 2rem;
 `
@@ -37,6 +37,12 @@ function CreateAnAccount({ onCreate }: createProps) {
     password: '',
     email: ''
   })
+
+  const initialForm = {
+    username: '',
+    password: '',
+    email: ''
+  }
   const [errors, setErrors] = useState<ErrorType[]>([])
 
 
@@ -67,6 +73,7 @@ function CreateAnAccount({ onCreate }: createProps) {
       } else {
         r.json().then(err => {
           setErrors(err.errors)
+          setCreateAccountForm(initialForm)
         })
       }
     })
@@ -91,10 +98,10 @@ function CreateAnAccount({ onCreate }: createProps) {
     <AccountDiv>
       <h2>Create An Account:</h2>
       <CreateForm onSubmit={handleSubmit}>
-      <TextField id="outlined-basic" label="Username" variant="outlined" name='username' type='text' required value={createAccountForm.username} onChange={handleChange}/>
+        <TextField id="outlined-basic" label="Username" variant="outlined" name='username' type='text' required value={createAccountForm.username} onChange={handleChange} />
         {specificError('Username has already been taken')}
-        <TextField name='password' type='password' required id="outlined-basic" label="Password" variant="outlined" value={createAccountForm.password} onChange={handleChange}/>
-        <TextField name='email' type='text' required id="outlined-basic" label="Email" variant="outlined" value={createAccountForm.email} onChange={handleChange}/>
+        <TextField name='password' type='password' required id="outlined-basic" label="Password" variant="outlined" value={createAccountForm.password} onChange={handleChange} />
+        <TextField name='email' type='text' required id="outlined-basic" label="Email" variant="outlined" value={createAccountForm.email} onChange={handleChange} />
         {specificError('Email has already been taken')}
         <Button type='submit' variant="contained">Create Account</Button>
       </CreateForm>

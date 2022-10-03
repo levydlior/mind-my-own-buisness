@@ -10,6 +10,7 @@ const Header = styled.header`
 display: flex;
 align-items: center;
 justify-content: space-between;
+padding: 1rem;
 `
 
 
@@ -66,7 +67,7 @@ function App() {
           </Link>
           </>
         ) : (
-          <h2>Mind My Own businesses</h2>
+          <h1>Mind My Own businesses</h1>
         )}
       </Header>
       {!loggedUser ? (
