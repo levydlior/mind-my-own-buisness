@@ -6,12 +6,12 @@ import Login from "./components/Login";
 import MainContent from "./components/MainContent";
 import styled from "@emotion/styled";
 
-
 const Header = styled.header`
 display: flex;
-flex-direction: row-reverse;
-padding: 1rem
+align-items: center;
+justify-content: space-between;
 `
+
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -59,11 +59,14 @@ function App() {
     <div className="App">
       <Header>
         {loggedUser ? (
+          <>
+          <h1>Mind My Own businesses</h1>
           <Link to="/" onClick={handleLogOut}>
             Log out
           </Link>
+          </>
         ) : (
-          <h2>hi</h2>
+          <h2>Mind My Own businesses</h2>
         )}
       </Header>
       {!loggedUser ? (
