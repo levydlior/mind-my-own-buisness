@@ -4,14 +4,18 @@ import ReceiptCard from "./ReceiptCard";
 import storage from "./../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-
-
-function Receipts({ onCreateReceipts, createReceiptsActive, onNewReceipts }) {
+function Receipts({
+  onCreateReceipts,
+  createReceiptsActive,
+  onNewReceipts,
+  loggedUser,
+}) {
   const [receipts, setReceipts] = useState([]);
   const [error, setError] = useState([]);
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
   const [uploading, setUploading] = useState(false);
+  const [currentBusiness, setCurrentBusiness] = useState(null);
 
   const params = useParams();
   const { businessId } = params;
@@ -36,8 +40,12 @@ function Receipts({ onCreateReceipts, createReceiptsActive, onNewReceipts }) {
       return;
     }
     setUploading(true);
-
-    const storageRef = ref(storage, `/files/${receiptForm.name}/${Date.now()}`);
+    const storageRef = ref(
+      storage,
+      `/files/${loggedUser.username}/${currentBusiness.name}/${
+        receiptForm.name
+      }/${Date.now()}`
+    );
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -64,6 +72,10 @@ function Receipts({ onCreateReceipts, createReceiptsActive, onNewReceipts }) {
     fetch(`/receipts/${businessId}`)
       .then((r) => r.json())
       .then((res) => setReceipts(res));
+
+    fetch(`/businesses/${businessId}`)
+      .then((r) => r.json())
+      .then((busi) => setCurrentBusiness(busi));
 
     setReceiptForm({ ...receiptForm, business_id: businessId });
   }, [params]);

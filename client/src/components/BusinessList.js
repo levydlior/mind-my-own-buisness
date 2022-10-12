@@ -13,7 +13,6 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
       .then((r) => r.json())
       .then((arrayOfBusinesses) => {
         setBusinesses(arrayOfBusinesses);
-        console.log("fetched");
       });
   }, [newReceipt]);
 

@@ -28,6 +28,7 @@ function MainContent({ loggedUser }) {
           createReceiptsActive={createReceiptsActive}
           onCreateReceipts={handleLinkClick}
           onNewReceipts={handleNewReceipts}
+          loggedUser={loggedUser}
         />
       </Route>
     </div>

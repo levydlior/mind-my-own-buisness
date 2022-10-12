@@ -7,12 +7,11 @@ import MainContent from "./components/MainContent";
 import styled from "@emotion/styled";
 
 const Header = styled.header`
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 1rem;
-`
-
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+`;
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -61,10 +60,10 @@ function App() {
       <Header>
         {loggedUser ? (
           <>
-          <h1>Mind My Own businesses</h1>
-          <Link to="/" onClick={handleLogOut}>
-            Log out
-          </Link>
+            <h1>Mind My Own businesses</h1>
+            <Link to="/" onClick={handleLogOut}>
+              Log out
+            </Link>
           </>
         ) : (
           <h1>Mind My Own businesses</h1>
