@@ -22,6 +22,7 @@ align-items: center;
 margin: 2rem;
 `
 
+
 type loginProps = {
     onLogin: CallableFunction
 }
@@ -82,9 +83,9 @@ function Login({ onLogin }: loginProps) {
         <LoginDiv>
             <h2>Login:</h2>
             <LoginForm onSubmit={handleLoginSubmit}>
-            <TextField id="outlined-basic" label="Username" variant="outlined" name='username' type='text' required value={loginForm.username} onChange={handleChange}/>
+            <TextField  id="outlined-basic" label="Username" variant="outlined" name='username' type='text' required value={loginForm.username} onChange={handleChange}/>
             <TextField name='password' type='password' required id="outlined-basic" label="Password" variant="outlined"  value={loginForm.password} onChange={handleChange} />
-            <Button type='submit' variant="contained">Login</Button>
+            <Button sx={{margin: '1rem'}} type='submit' variant="contained">Login</Button>
                 {errors ? errors.map(err => <p>{err.error}</p>) : null}
             </LoginForm>
             <Link to='/create-account'>Don't have an account</Link>
