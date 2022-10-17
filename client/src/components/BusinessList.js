@@ -52,12 +52,14 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
 
   return (
     <div>
+      <div>
       <CreateNewBusiness
         loggedUser={loggedUser}
         active={active}
         handleActiveChange={handleActiveChange}
         onAddBusiness={handleAddBusiness}
       />
+      </div>
       <ul>{businessList}</ul>
     </div>
   );

@@ -16,7 +16,7 @@ margin: 2rem;
 const CreateForm = styled.form`
 display: flex;
 flex-direction: column;
-justify-content: space-between;
+justify-content: space-evenly;
 height: 22rem;
 align-items: center;
 margin: 2rem;

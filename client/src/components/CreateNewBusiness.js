@@ -1,4 +1,27 @@
 import React, { useState } from "react";
+import styled from "@emotion/styled";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
+const BusniessForm = styled.form`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-items: inherit;
+  width: 57%;
+  flex-wrap: wrap;
+`;
+
+const AddBusinessButtonDiv = styled.div`
+  text-align: center;
+  align-items: inherit;
+`;
+
+const ErrorInputDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 function CreateNewBusiness({
   loggedUser,
@@ -11,6 +34,7 @@ function CreateNewBusiness({
     name: "",
     user_id: id,
   });
+
   const [error, setError] = useState(null);
 
   const initialForm = {
@@ -53,28 +77,41 @@ function CreateNewBusiness({
 
   function handleClick() {
     handleActiveChange(false);
+    setError(null);
     setBusinessForm(initialForm);
   }
 
   return (
-    <div>
+    <ErrorInputDiv>
       {!active ? (
-        <button onClick={() => handleActiveChange(true)}>Add a Business</button>
+        <AddBusinessButtonDiv>
+          <Button onClick={() => handleActiveChange(true)} variant="contained">
+            Add a business
+          </Button>
+        </AddBusinessButtonDiv>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <input
+        <BusniessForm onSubmit={handleSubmit}>
+          <TextField
+          size="small"
+            id="outlined-basic"
+            label="name"
+            variant="outlined"
             name="name"
             type="text"
+            required
             value={businessForm.name}
             onChange={handleChange}
-            required
           />
-          {error ? <p>{error.errors[0]}</p> : null}
-          <input type="submit" value="Add" />
-          <button onClick={handleClick}>Cancel</button>
-        </form>
+          <Button type="submit" variant="contained">
+            Add a business
+          </Button>
+          <Button type="submit" variant="contained" onClick={handleClick}>
+            Cancel
+          </Button>
+        </BusniessForm>
       )}
-    </div>
+      {error ? <p>{error.errors[0]}</p> : null}
+    </ErrorInputDiv>
   );
 }
 

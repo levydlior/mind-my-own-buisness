@@ -16,8 +16,8 @@ margin: 2rem;
 const LoginForm = styled.form`
 display: flex;
 flex-direction: column;
-justify-content: space-between;
-height: 12rem;
+justify-content: space-evenly;
+height: 18rem;
 align-items: center;
 margin: 2rem;
 `
