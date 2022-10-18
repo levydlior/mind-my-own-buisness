@@ -1,7 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import BusinessCard from "../BusinessCard";
 import CreateNewBusiness from "./CreateNewBusiness";
+import styled from "@emotion/styled";
+
+const BusinessUl = styled.ul`
+display: flex;
+justify-content: space-evenly;
+list-style: none;
+margin-top: 2rem;
+`
+
 
 function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
   const [businesses, setBusinesses] = useState([]);
@@ -53,14 +62,14 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
   return (
     <div>
       <div>
-      <CreateNewBusiness
-        loggedUser={loggedUser}
-        active={active}
-        handleActiveChange={handleActiveChange}
-        onAddBusiness={handleAddBusiness}
-      />
+        <CreateNewBusiness
+          loggedUser={loggedUser}
+          active={active}
+          handleActiveChange={handleActiveChange}
+          onAddBusiness={handleAddBusiness}
+        />
       </div>
-      <ul>{businessList}</ul>
+      <BusinessUl>{businessList}</BusinessUl>
     </div>
   );
 }

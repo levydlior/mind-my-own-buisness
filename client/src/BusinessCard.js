@@ -1,5 +1,22 @@
 import { Link } from "react-router-dom";
 import { getStorage, ref, deleteObject } from "firebase/storage";
+import DeleteIcon from '@mui/icons-material/Delete';
+import styled from "@emotion/styled";
+
+const BusinessLi = styled.li`
+display: flex;
+listStyle: none;
+`
+
+const StyledIcon = styled(DeleteIcon)`
+&:hover {
+  cursor: pointer;
+  color: gray;
+}
+margin-left: 0.5rem;
+
+`
+
 
 function BusinessCard({ business, onHandleLinkClick, onDelete }) {
   async function handleDelete() {
@@ -27,12 +44,12 @@ function BusinessCard({ business, onHandleLinkClick, onDelete }) {
   }
 
   return (
-    <li key={business.id}>
+    <BusinessLi key={business.id}>
       <Link to={`/businesses/${business.id}`} onClick={onHandleLinkClick}>
         {business.name}
       </Link>
-      <button onClick={handleDelete}>Delete</button>
-    </li>
+    <StyledIcon fontSize='small' onClick={handleDelete}/>
+    </BusinessLi>
   );
 }
 

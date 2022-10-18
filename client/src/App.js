@@ -11,13 +11,12 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1.5rem;
-
 `;
 
 const WelcomeText = styled.div`
-justify-content: center;
-text-align: center;
-`
+  justify-content: center;
+  text-align: center;
+`;
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -97,7 +96,7 @@ function App() {
           </Route>
           <Route exact path="/">
             <WelcomeText>
-            <h2>Welcome {loggedUser.username}</h2>
+              <h2>Welcome {loggedUser.username}</h2>
             </WelcomeText>
           </Route>
           <Route exact path="*">
