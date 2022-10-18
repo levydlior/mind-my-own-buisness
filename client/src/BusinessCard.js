@@ -14,7 +14,6 @@ const StyledIcon = styled(DeleteIcon)`
   color: gray;
 }
 margin-left: 0.5rem;
-
 `
 
 
