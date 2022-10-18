@@ -3,6 +3,24 @@ import { useParams } from "react-router";
 import ReceiptCard from "./ReceiptCard";
 import storage from "./../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import styled from "@emotion/styled";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
+const ReceiptForm = styled.form`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-items: inherit;
+  flex-wrap: wrap;
+  margin: 1rem;
+`;
+
+const AddReceiptButtonDiv = styled.div`
+  text-align: center;
+  align-items: inherit;
+  margin: 1rem;
+`;
 
 function Receipts({
   onCreateReceipts,
@@ -135,45 +153,67 @@ function Receipts({
   }, [receiptForm.image]);
 
   function handleSubmit(e) {
+    setUploading(true)
+    onCreateReceipts(false)
     e.preventDefault();
     handleUpload();
   }
 
   return (
     <div>
-      <button onClick={() => onCreateReceipts(true)}>Add Receipt</button>
+      {!createReceiptsActive ? (
+        <AddReceiptButtonDiv>
+          <Button disabled={uploading? true: false} variant="contained" onClick={() => onCreateReceipts(true)}>
+            {uploading? "Uploading!" : "Add A Receipt"}
+          </Button>
+        </AddReceiptButtonDiv>
+      ) : null}
       {createReceiptsActive ? (
-        <form onSubmit={handleSubmit}>
-          <input
+        <ReceiptForm onSubmit={handleSubmit}>
+          <TextField
+            size="small"
+            id="outlined-basic"
+            label="name"
+            variant="outlined"
             name="name"
             type="text"
             required
-            placeholder="name"
             value={receiptForm.name}
             onChange={handleChange}
           />
           {error ? <p>{error}</p> : null}
-          <input
+          <TextField
+            size="small"
+            id="outlined-basic"
+            label="amount"
+            variant="outlined"
             name="amount"
             type="number"
             required
-            placeholder="Amount"
             value={receiptForm.amount}
             onChange={handleChange}
           />
-          <input
+          <TextField
+            size="small"
+            id="outlined-basic"
+            variant="outlined"
             name="image"
             type="file"
             required
-            placeholder="image"
             onChange={handleImageChange}
             accept="image"
+            placeholder="image"
           />
-          <input type="submit" value="Add Receipt" />
-          <button onClick={() => onCreateReceipts(false)}>Cancel</button>
-        </form>
+          <Button variant="contained" type="submit" value="Add Receipt">
+            Add receipt
+          </Button>
+
+          <Button variant="contained" onClick={() => onCreateReceipts(false)}>
+            Cancel
+          </Button>
+        </ReceiptForm>
       ) : null}
-      {uploading ? <p>Uploading!</p> : <>{receiptsList}</>}
+      {receiptsList}
     </div>
   );
 }
