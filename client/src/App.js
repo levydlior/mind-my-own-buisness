@@ -97,6 +97,7 @@ function App() {
           <Route exact path="/">
             <WelcomeText>
               <h2>Welcome {loggedUser.username}</h2>
+              <Link style={{border: "solid", padding: '0.5rem'}} to='/businesses'>Your Businesses</Link>
             </WelcomeText>
           </Route>
           <Route exact path="*">

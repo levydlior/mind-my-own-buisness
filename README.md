@@ -35,7 +35,7 @@ This web app is designed to allow the user to track their businesses and the rec
 To run this project: <ol>
   <li>You need to have postgresql installed on your device</li>
   <li>Clone the repo to your computer</li>
-  <li>(assuming you have postgresql) In the terminal run sudo service postgresql start (you'll need to enter your user's password)</li>
+  <li>(assuming you have postgresql) In the terminal run sudo service postgresql start (you'll need to enter your user's password) </li>
   <li>In the root directory run bundle install</li>
   <li>In the root directory run rails db:migrate db:seed</li>
   <li>Cd into the frontend directory</li>

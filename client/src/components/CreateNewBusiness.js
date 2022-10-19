@@ -10,6 +10,7 @@ const BusniessForm = styled.form`
   align-items: inherit;
   width: 57%;
   flex-wrap: wrap;
+  position: absolute;
 `;
 
 const AddBusinessButtonDiv = styled.div`

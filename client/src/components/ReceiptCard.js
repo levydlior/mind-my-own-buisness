@@ -1,5 +1,5 @@
 import { getStorage, ref, deleteObject } from "firebase/storage";
-// import styled from 'styled-components'
+import Button from "@mui/material/Button";
 import styled from "@emotion/styled";
 
 const Image = styled.img`
@@ -41,7 +41,7 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
     <ReceiptDiv>
       <h2>{receipt.name}</h2>
       <Image src={receipt.image} alt="receipt image" />
-      <button onClick={handleClick}>Delete</button>
+      <Button sx={{marginTop: '0.5rem'}}variant="contained" onClick={handleClick}>Delete</Button>
       <h3>Amount: {receipt.amount}</h3>
     </ReceiptDiv>
   );
