@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+
 * {
     box-sizing: border-box;
     text-decoration: none;
+    font-family: Roboto;
+    
 }
+a { color: blue; } 

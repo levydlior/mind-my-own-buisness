@@ -16,6 +16,10 @@ const ReceiptForm = styled.form`
   margin: 1rem;
 `;
 
+const SearchReceiptForm = styled.form`
+text-align: center;
+`
+
 const AddReceiptButtonDiv = styled.div`
   text-align: center;
   align-items: inherit;
@@ -34,6 +38,7 @@ function Receipts({
   const [percent, setPercent] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [currentBusiness, setCurrentBusiness] = useState(null);
+  const [searchText, setSearchText] = useState(``);
 
   const params = useParams();
   const { businessId } = params;
@@ -103,7 +108,11 @@ function Receipts({
     setReceipts(updatedReceipts);
   }
 
-  const receiptsList = receipts.map((receipt) => (
+  const filterReceiptsList = receipts.filter((rec) =>
+    rec.name.includes(searchText)
+  );
+
+  const receiptsList = filterReceiptsList.map((receipt) => (
     <ReceiptCard
       key={receipt.name}
       receipt={receipt}
@@ -153,18 +162,26 @@ function Receipts({
   }, [receiptForm.image]);
 
   function handleSubmit(e) {
-    setUploading(true)
-    onCreateReceipts(false)
+    setUploading(true);
+    onCreateReceipts(false);
     e.preventDefault();
     handleUpload();
+  }
+
+  function handleSearchTextCHange(e) {
+    setSearchText(e.target.value);
   }
 
   return (
     <div>
       {!createReceiptsActive ? (
         <AddReceiptButtonDiv>
-          <Button disabled={uploading? true: false} variant="contained" onClick={() => onCreateReceipts(true)}>
-            {uploading? "Uploading!" : "Add A Receipt"}
+          <Button
+            disabled={uploading ? true : false}
+            variant="contained"
+            onClick={() => onCreateReceipts(true)}
+          >
+            {uploading ? "Uploading!" : "Add A Receipt"}
           </Button>
         </AddReceiptButtonDiv>
       ) : null}
@@ -213,6 +230,19 @@ function Receipts({
           </Button>
         </ReceiptForm>
       ) : null}
+      <SearchReceiptForm>
+        <h3>Find A Receipt By Name:</h3>
+        <TextField
+          size="small"
+          id="outlined-basic"
+          label="Find A Receipt"
+          variant="outlined"
+          type="test"
+          required
+          value={searchText}
+          onChange={handleSearchTextCHange}
+        />
+      </SearchReceiptForm>
       {receiptsList}
     </div>
   );
