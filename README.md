@@ -35,7 +35,11 @@ This web app is designed to allow the user to track their businesses and the rec
 To run this project: <ol>
   <li>You need to have postgresql installed on your device</li>
   <li>Clone the repo to your computer</li>
-  <li>(assuming you have postgresql) In the terminal run sudo service postgresql start (you'll need to enter your user's password) </li>
+  <li>(assuming you have postgresql) In the terminal run:(you'll need to enter your user's password) </li>
+
+  ```console
+  $ sudo service postgresql start 
+  ```
   <li>In the root directory run: </li>
 
   ```console

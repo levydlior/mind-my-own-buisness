@@ -5,7 +5,6 @@ import styled from "@emotion/styled";
 const Image = styled.img`
 width: 35rem;
 height: 34rem;
-
 `
 
 const ReceiptDiv = styled.div`

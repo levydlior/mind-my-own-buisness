@@ -6,9 +6,10 @@ import styled from "@emotion/styled";
 
 const BusinessUl = styled.ul`
 display: flex;
-justify-content: space-evenly;
+justify-content: space-between;
 list-style: none;
-margin-top: 2rem;
+margin: 1rem;
+flex-direction: column;
 `
 
 
@@ -69,7 +70,11 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
           onAddBusiness={handleAddBusiness}
         />
       </div>
-      <BusinessUl>{businessList}</BusinessUl>
+    
+      <BusinessUl>
+      <h2>My Businesses:</h2>
+      {businessList}
+      </BusinessUl>
     </div>
   );
 }

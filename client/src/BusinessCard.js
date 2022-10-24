@@ -8,6 +8,7 @@ import DeleteBusinessDialog from './components/DeleteBusinessDialog'
 const BusinessLi = styled.li`
   display: flex;
   liststyle: none;
+  margin: 1rem;
 `;
 
 const StyledIcon = styled(DeleteIcon)`

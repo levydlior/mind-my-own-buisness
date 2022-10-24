@@ -10,21 +10,24 @@ import Button from "@mui/material/Button";
 const ReceiptForm = styled.form`
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
-  align-items: inherit;
   flex-wrap: wrap;
   margin: 1rem;
+  width: 70rem;
 `;
 
 const SearchReceiptForm = styled.form`
-text-align: center;
-`
+  text-align: center;
+`;
 
 const AddReceiptButtonDiv = styled.div`
   text-align: center;
   align-items: inherit;
   margin: 1rem;
 `;
+
+const ReceiptsDiv = styled.div`
+padding: 1.5rem 12rem;
+` 
 
 function Receipts({
   onCreateReceipts,
@@ -173,7 +176,7 @@ function Receipts({
   }
 
   return (
-    <div>
+    <ReceiptsDiv>
       {!createReceiptsActive ? (
         <AddReceiptButtonDiv>
           <Button
@@ -190,7 +193,7 @@ function Receipts({
           <TextField
             size="small"
             id="outlined-basic"
-            label="name"
+            label="Receipt Name"
             variant="outlined"
             name="name"
             type="text"
@@ -202,7 +205,7 @@ function Receipts({
           <TextField
             size="small"
             id="outlined-basic"
-            label="amount"
+            label="Amount"
             variant="outlined"
             name="amount"
             type="number"
@@ -244,7 +247,7 @@ function Receipts({
         />
       </SearchReceiptForm>
       {receiptsList}
-    </div>
+    </ReceiptsDiv>
   );
 }
 

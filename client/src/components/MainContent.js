@@ -2,6 +2,13 @@ import  { useState } from "react";
 import { Route, useRouteMatch } from "react-router";
 import BusinessList from "./BusinessList";
 import Receipts from "./Receipts";
+import styled from "@emotion/styled";
+
+
+const MainContentDiv = styled.div`
+display: flex;
+flex-direction: row;
+`
 
 function MainContent({ loggedUser }) {
   const match = useRouteMatch();
@@ -17,7 +24,7 @@ function MainContent({ loggedUser }) {
   }
   
   return (
-    <div>
+    <MainContentDiv>
       <BusinessList
         loggedUser={loggedUser}
         onLinkClick={handleLinkClick}
@@ -31,7 +38,7 @@ function MainContent({ loggedUser }) {
           loggedUser={loggedUser}
         />
       </Route>
-    </div>
+    </MainContentDiv>
   );
 }
 

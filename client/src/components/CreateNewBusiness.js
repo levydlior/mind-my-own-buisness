@@ -5,22 +5,15 @@ import Button from "@mui/material/Button";
 
 const BusniessForm = styled.form`
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  align-items: inherit;
-  width: 57%;
+  justify-content: space-between;
+  width: 40rem;
   flex-wrap: wrap;
 `
-
-const AddBusinessButtonDiv = styled.div`
-  text-align: center;
-  align-items: inherit;
-`;
-
 const ErrorInputDiv = styled.div`
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   align-items: center;
+  margin: 2rem;
 `;
 
 function CreateNewBusiness({
@@ -84,17 +77,17 @@ function CreateNewBusiness({
   return (
     <ErrorInputDiv>
       {!active ? (
-        <AddBusinessButtonDiv>
+        <Button>
           <Button onClick={() => handleActiveChange(true)} variant="contained">
             Add a business
           </Button>
-        </AddBusinessButtonDiv>
+        </Button>
       ) : (
         <BusniessForm onSubmit={handleSubmit}>
           <TextField
           size="small"
             id="outlined-basic"
-            label="name"
+            label="Business Name"
             variant="outlined"
             name="name"
             type="text"
