@@ -36,12 +36,32 @@ To run this project: <ol>
   <li>You need to have postgresql installed on your device</li>
   <li>Clone the repo to your computer</li>
   <li>(assuming you have postgresql) In the terminal run sudo service postgresql start (you'll need to enter your user's password) </li>
-  <li>In the root directory run bundle install</li>
-  <li>In the root directory run rails db:migrate db:seed</li>
-  <li>Cd into the frontend directory</li>
-  <li>In the frontend directory run npm install</li>
-  <li>In the root directory run rails s</li>
-  <li>Open another terminal, go to the frontend directory and run npm start</li>
+  <li>In the root directory run: </li>
+
+  ```console
+  $ bundle install
+  ```
+  <li>In the root directory run:</li>
+
+  ```console
+  $ rails db:migrate db:seed
+  ```
+  <li>Cd into the frontend directory (client)</li>
+  <li>In the frontend directory run:</li>
+
+```console
+  $ npm install
+```
+  <li>In the root directory run:</li>
+
+  ```console
+  $ rails s
+  ```
+  <li>Open another terminal, go to the frontend directory and run:</li>
+
+```console
+  $ npm start
+```
   <li>You'll need to create your own firebase account and follow the instructions on how to integrate it into react (using the key they'll provide you and a firebase file</li>
   <li>Go to http://localhost:4000/</li>
   <li>Create an account and enjoy!</li>
