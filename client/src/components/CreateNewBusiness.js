@@ -8,12 +8,10 @@ const BusniessForm = styled.form`
   justify-content: space-between;
   width: 40rem;
   flex-wrap: wrap;
-`
+`;
 const ErrorInputDiv = styled.div`
   display: flex;
-  // flex-direction: column;
   align-items: center;
-  margin: 2rem;
 `;
 
 function CreateNewBusiness({
@@ -49,7 +47,7 @@ function CreateNewBusiness({
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "accept": "application/json",
+        accept: "application/json",
       },
       body: JSON.stringify(businessForm),
     }).then((r) => {
@@ -85,7 +83,7 @@ function CreateNewBusiness({
       ) : (
         <BusniessForm onSubmit={handleSubmit}>
           <TextField
-          size="small"
+            size="small"
             id="outlined-basic"
             label="Business Name"
             variant="outlined"

@@ -8,11 +8,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 const ReceiptForm = styled.form`
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin: 1rem;
-  width: 70rem;
+  // display: flex;
+  // justify-content: space-evenly;
+  // flex-wrap: wrap;
+  // margin: 1rem;
+  // width: 70rem;
 `;
 
 const SearchReceiptForm = styled.form`
@@ -20,14 +20,21 @@ const SearchReceiptForm = styled.form`
 `;
 
 const AddReceiptButtonDiv = styled.div`
-  text-align: center;
-  align-items: inherit;
-  margin: 1rem;
+  // text-align: center;
+  // align-items: inherit;
+  // margin: 1rem;
+`;
+
+const NameAndButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ReceiptsDiv = styled.div`
-padding: 1.5rem 12rem;
-` 
+  padding-inline: 2rem;
+  width: 622px;
+`;
 
 function Receipts({
   onCreateReceipts,
@@ -178,15 +185,18 @@ function Receipts({
   return (
     <ReceiptsDiv>
       {!createReceiptsActive ? (
-        <AddReceiptButtonDiv>
-          <Button
-            disabled={uploading ? true : false}
-            variant="contained"
-            onClick={() => onCreateReceipts(true)}
-          >
-            {uploading ? "Uploading!" : "Add A Receipt"}
-          </Button>
-        </AddReceiptButtonDiv>
+        <NameAndButton>
+          <h2>bla</h2>
+          <AddReceiptButtonDiv>
+            <Button
+              disabled={uploading ? true : false}
+              variant="contained"
+              onClick={() => onCreateReceipts(true)}
+            >
+              {uploading ? "Uploading!" : "Add A Receipt"}
+            </Button>
+          </AddReceiptButtonDiv>
+        </NameAndButton>
       ) : null}
       {createReceiptsActive ? (
         <ReceiptForm onSubmit={handleSubmit}>
@@ -233,7 +243,8 @@ function Receipts({
           </Button>
         </ReceiptForm>
       ) : null}
-      <SearchReceiptForm>
+
+      {/* <SearchReceiptForm>
         <h3>Find A Receipt By Name:</h3>
         <TextField
           size="small"
@@ -245,7 +256,7 @@ function Receipts({
           value={searchText}
           onChange={handleSearchTextCHange}
         />
-      </SearchReceiptForm>
+      </SearchReceiptForm> */}
       {receiptsList}
     </ReceiptsDiv>
   );

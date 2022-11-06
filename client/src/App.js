@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Link, Route, Switch, useHistory } from "react-router-dom";
 import CreateAnAccount from "./components/CreateAnAccount";
 import Login from "./components/Login";
 import MainContent from "./components/MainContent";
 import styled from "@emotion/styled";
-import Logo from "./components/Logo"
-
-const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1.5rem;
-`;
+import Header from "./components/Header";
+import { Divider } from "@mui/material";
 
 const WelcomeText = styled.div`
   justify-content: center;
@@ -63,20 +57,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header>
-        {loggedUser ? (
-          <>
-            <Logo/>
-            <Link to="/" onClick={handleLogOut}>
-              Log out
-            </Link>
-          </>
-        ) : (
-          <>
-          <Logo/>
-          </>
-        )}
-      </Header>
+      <Header loggedUser={loggedUser} onLogOut={handleLogOut} />
+      <Divider variant="middle" color="black"/>
       {!loggedUser ? (
         <Switch>
           <Route exact path="/">
@@ -100,7 +82,12 @@ function App() {
           <Route exact path="/">
             <WelcomeText>
               <h2>Welcome {loggedUser.username}!</h2>
-              <Link style={{border: "solid", padding: '0.5rem'}} to='/businesses'>Your Businesses</Link>
+              <Link
+                style={{ border: "solid", padding: "0.5rem" }}
+                to="/businesses"
+              >
+                Your Businesses
+              </Link>
             </WelcomeText>
           </Route>
           <Route exact path="*">

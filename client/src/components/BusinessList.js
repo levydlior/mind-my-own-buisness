@@ -5,13 +5,21 @@ import CreateNewBusiness from "./CreateNewBusiness";
 import styled from "@emotion/styled";
 
 const BusinessUl = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  flex-direction: column;
+  margin: 0rem;
+  padding: 0rem;
+  width: 259px;
+`;
+
+const BusinessAreaDiv = styled.div`
 display: flex;
 justify-content: space-between;
-list-style: none;
-margin: 1rem;
 flex-direction: column;
+height: 489px;
 `
-
 
 function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
   const [businesses, setBusinesses] = useState([]);
@@ -61,21 +69,18 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
   });
 
   return (
-    <div>
-      <div>
-        <CreateNewBusiness
-          loggedUser={loggedUser}
-          active={active}
-          handleActiveChange={handleActiveChange}
-          onAddBusiness={handleAddBusiness}
-        />
-      </div>
-    
+    <BusinessAreaDiv>
       <BusinessUl>
-      <h2>My Businesses:</h2>
-      {businessList}
+        <h2>My Businesses</h2>
+        {businessList}
       </BusinessUl>
-    </div>
+      <CreateNewBusiness
+        loggedUser={loggedUser}
+        active={active}
+        handleActiveChange={handleActiveChange}
+        onAddBusiness={handleAddBusiness}
+      />
+    </BusinessAreaDiv>
   );
 }
 
