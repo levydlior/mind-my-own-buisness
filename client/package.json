@@ -53,6 +53,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+    "@svgr/webpack": "^6.5.1",
+    "@types/react-router-dom": "^5.3.3",
+    "file-loader": "^6.2.0"
   }
 }

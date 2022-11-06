@@ -5,6 +5,7 @@ import CreateAnAccount from "./components/CreateAnAccount";
 import Login from "./components/Login";
 import MainContent from "./components/MainContent";
 import styled from "@emotion/styled";
+import Logo from "./components/Logo"
 
 const Header = styled.header`
   display: flex;
@@ -65,13 +66,15 @@ function App() {
       <Header>
         {loggedUser ? (
           <>
-            <h1>Mind My Own businesses</h1>
+            <Logo/>
             <Link to="/" onClick={handleLogOut}>
               Log out
             </Link>
           </>
         ) : (
-          <h1>Mind My Own businesses</h1>
+          <>
+          <Logo/>
+          </>
         )}
       </Header>
       {!loggedUser ? (
