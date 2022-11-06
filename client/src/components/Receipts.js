@@ -6,6 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import styled from "@emotion/styled";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import BasicPopover from "./BasicPopover";
 
 const ReceiptForm = styled.form`
   // display: flex;
@@ -14,7 +15,6 @@ const ReceiptForm = styled.form`
   // margin: 1rem;
   // width: 70rem;
 `;
-
 const SearchReceiptForm = styled.form`
   text-align: center;
 `;
@@ -49,6 +49,7 @@ function Receipts({
   const [uploading, setUploading] = useState(false);
   const [currentBusiness, setCurrentBusiness] = useState(null);
   const [searchText, setSearchText] = useState(``);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const params = useParams();
   const { businessId } = params;
@@ -176,6 +177,7 @@ function Receipts({
     onCreateReceipts(false);
     e.preventDefault();
     handleUpload();
+    setAnchorEl(null);
   }
 
   function handleSearchTextCHange(e) {
@@ -186,62 +188,24 @@ function Receipts({
     <ReceiptsDiv>
       {!createReceiptsActive ? (
         <NameAndButton>
-          <h2>bla</h2>
+          {receipts.length > 0 ? (
+            <h2>{receipts[0].business.name}</h2>
+          ) : (
+            <h2>No Receipts Yet</h2>
+          )}
           <AddReceiptButtonDiv>
-            <Button
-              disabled={uploading ? true : false}
-              variant="contained"
-              onClick={() => onCreateReceipts(true)}
-            >
-              {uploading ? "Uploading!" : "Add A Receipt"}
-            </Button>
+            <BasicPopover
+              handleImageChange={handleImageChange}
+              handleSubmit={handleSubmit}
+              receiptForm={receiptForm}
+              handleChange={handleChange}
+              error={error}
+              uploading={uploading}
+              setAnchorEl={setAnchorEl}
+              anchorEl={anchorEl}
+            />
           </AddReceiptButtonDiv>
         </NameAndButton>
-      ) : null}
-      {createReceiptsActive ? (
-        <ReceiptForm onSubmit={handleSubmit}>
-          <TextField
-            size="small"
-            id="outlined-basic"
-            label="Receipt Name"
-            variant="outlined"
-            name="name"
-            type="text"
-            required
-            value={receiptForm.name}
-            onChange={handleChange}
-          />
-          {error ? <p>{error}</p> : null}
-          <TextField
-            size="small"
-            id="outlined-basic"
-            label="Amount"
-            variant="outlined"
-            name="amount"
-            type="number"
-            required
-            value={receiptForm.amount}
-            onChange={handleChange}
-          />
-          <TextField
-            size="small"
-            id="outlined-basic"
-            variant="outlined"
-            name="image"
-            type="file"
-            required
-            onChange={handleImageChange}
-            accept="image"
-            placeholder="image"
-          />
-          <Button variant="contained" type="submit" value="Add Receipt">
-            Add receipt
-          </Button>
-
-          <Button variant="contained" onClick={() => onCreateReceipts(false)}>
-            Cancel
-          </Button>
-        </ReceiptForm>
       ) : null}
 
       {/* <SearchReceiptForm>
