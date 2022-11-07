@@ -42,7 +42,7 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
       <h2>{receipt.name}</h2>
       <Image src={receipt.image} alt="receipt image" />
       <Button sx={{marginTop: '0.5rem'}}variant="contained" onClick={handleClick}>Delete</Button>
-      <h3>Amount: {receipt.amount}</h3>
+      <h3>Amount: ${receipt.amount}</h3>
     </ReceiptDiv>
   );
 }

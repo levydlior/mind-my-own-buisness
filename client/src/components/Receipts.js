@@ -4,26 +4,12 @@ import ReceiptCard from "./ReceiptCard";
 import storage from "./../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import styled from "@emotion/styled";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import BasicPopover from "./BasicPopover";
 
-const ReceiptForm = styled.form`
-  // display: flex;
-  // justify-content: space-evenly;
-  // flex-wrap: wrap;
-  // margin: 1rem;
-  // width: 70rem;
-`;
-const SearchReceiptForm = styled.form`
-  text-align: center;
-`;
+import ReceiptFormPopOver from "./ReceiptFormPopOver";
 
-const AddReceiptButtonDiv = styled.div`
-  // text-align: center;
-  // align-items: inherit;
-  // margin: 1rem;
-`;
+// const SearchReceiptForm = styled.form`
+//   text-align: center;
+// `;
 
 const NameAndButton = styled.div`
   display: flex;
@@ -109,7 +95,7 @@ function Receipts({
 
     fetch(`/businesses/${businessId}`)
       .then((r) => r.json())
-      .then((busi) => setCurrentBusiness(busi));
+      .then((fetchedBusiness) => setCurrentBusiness(fetchedBusiness));
 
     setReceiptForm({ ...receiptForm, business_id: businessId });
   }, [params]);
@@ -167,7 +153,6 @@ function Receipts({
             setUploading(false);
             setReceiptForm(originalForm);
             setError(err.errors[0]);
-            setAnchorEl(document.querySelector("#root > div > div > div.css-sfykc1 > div.css-1mwn02k > div > div > button"));
           });
         }
       });
@@ -185,6 +170,8 @@ function Receipts({
     setSearchText(e.target.value);
   }
 
+  console.log(anchorEl);
+
   return (
     <ReceiptsDiv>
       {!createReceiptsActive ? (
@@ -194,18 +181,18 @@ function Receipts({
           ) : (
             <h2>No Receipts Yet</h2>
           )}
-          <AddReceiptButtonDiv>
-            <BasicPopover
-              handleImageChange={handleImageChange}
-              handleSubmit={handleSubmit}
-              receiptForm={receiptForm}
-              handleChange={handleChange}
-              error={error}
-              uploading={uploading}
-              setAnchorEl={setAnchorEl}
-              anchorEl={anchorEl}
-            />
-          </AddReceiptButtonDiv>
+
+          <ReceiptFormPopOver
+            handleImageChange={handleImageChange}
+            handleSubmit={handleSubmit}
+            receiptForm={receiptForm}
+            handleChange={handleChange}
+            error={error}
+            uploading={uploading}
+            setAnchorEl={setAnchorEl}
+            anchorEl={anchorEl}
+            setError={setError}
+          />
         </NameAndButton>
       ) : null}
 

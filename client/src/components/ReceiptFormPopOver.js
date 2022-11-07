@@ -12,7 +12,7 @@ const ReceiptForm = styled.form`
   height: 300px;
 `;
 
-export default function BasicPopover({
+export default function ReceiptFormPopOver({
   handleImageChange,
   handleSubmit,
   receiptForm,
@@ -21,19 +21,21 @@ export default function BasicPopover({
   uploading,
   anchorEl,
   setAnchorEl,
+  setError,
 }) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-
+  function handleCancelClick() {
+    setAnchorEl(null);
+    setError([]);
+  }
+  
   return (
     <div>
       <Button aria-describedby={id} variant="contained" onClick={handleClick}>
@@ -43,7 +45,6 @@ export default function BasicPopover({
         id={id}
         open={open}
         anchorEl={anchorEl}
-        onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
@@ -65,7 +66,7 @@ export default function BasicPopover({
                 value={receiptForm.name}
                 onChange={(e) => handleChange(e)}
               />
-              {error.length > 0  ? <p>{error}</p> : null}
+              {error.length > 0 ? <p>{error}</p> : null}
               <TextField
                 size="small"
                 id="outlined-basic"
@@ -88,17 +89,10 @@ export default function BasicPopover({
                 accept="image"
                 placeholder="image"
               />
-              <Button
-                variant="contained"
-                type="submit"
-                value="Add Receipt"
-              >
+              <Button variant="contained" type="submit" value="Add Receipt">
                 Add receipt
               </Button>
-              <Button
-                variant="contained"
-                onClick={() => setAnchorEl(null)}
-              >
+              <Button variant="contained" onClick={handleCancelClick}>
                 Cancel
               </Button>
             </ReceiptForm>
