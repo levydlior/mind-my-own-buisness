@@ -154,18 +154,20 @@ function Receipts({
       }).then((r) => {
         if (r.ok) {
           r.json().then((rec) => {
-            setError(null);
+            setError([]);
             setReceiptForm(originalForm);
             setReceipts([...receipts, rec]);
             onCreateReceipts(false);
             setUploading(false);
             onNewReceipts(rec);
+            setAnchorEl(null);
           });
         } else {
           r.json().then((err) => {
             setUploading(false);
             setReceiptForm(originalForm);
             setError(err.errors[0]);
+            setAnchorEl(document.querySelector("#root > div > div > div.css-sfykc1 > div.css-1mwn02k > div > div > button"));
           });
         }
       });
@@ -177,7 +179,6 @@ function Receipts({
     onCreateReceipts(false);
     e.preventDefault();
     handleUpload();
-    setAnchorEl(null);
   }
 
   function handleSearchTextCHange(e) {

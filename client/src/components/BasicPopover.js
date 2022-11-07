@@ -3,6 +3,14 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import styled from "@emotion/styled";
+
+const ReceiptForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+`;
 
 export default function BasicPopover({
   handleImageChange,
@@ -25,6 +33,7 @@ export default function BasicPopover({
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+
   return (
     <div>
       <Button aria-describedby={id} variant="contained" onClick={handleClick}>
@@ -44,7 +53,7 @@ export default function BasicPopover({
           {uploading ? (
             <h3>Uploading!</h3>
           ) : (
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <ReceiptForm onSubmit={(e) => handleSubmit(e)}>
               <TextField
                 size="small"
                 id="outlined-basic"
@@ -56,7 +65,7 @@ export default function BasicPopover({
                 value={receiptForm.name}
                 onChange={(e) => handleChange(e)}
               />
-              {error ? <p>{error}</p> : null}
+              {error.length > 0  ? <p>{error}</p> : null}
               <TextField
                 size="small"
                 id="outlined-basic"
@@ -79,14 +88,20 @@ export default function BasicPopover({
                 accept="image"
                 placeholder="image"
               />
-              <Button variant="contained" type="submit" value="Add Receipt">
+              <Button
+                variant="contained"
+                type="submit"
+                value="Add Receipt"
+              >
                 Add receipt
               </Button>
-
-              <Button variant="contained" onClick={() => setAnchorEl(null)}>
+              <Button
+                variant="contained"
+                onClick={() => setAnchorEl(null)}
+              >
                 Cancel
               </Button>
-            </form>
+            </ReceiptForm>
           )}
         </Typography>
       </Popover>
