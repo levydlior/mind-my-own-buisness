@@ -38,7 +38,7 @@ function CreateNewBusiness({
       method: "POST",
       headers: {
         "content-type": "application/json",
-        accept: "application/json",
+        "accept": "application/json",
       },
       body: JSON.stringify(businessForm),
     }).then((r) => {

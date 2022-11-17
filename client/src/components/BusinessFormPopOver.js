@@ -42,8 +42,13 @@ export default function BusinessFormPopOver({
 
   return (
     <div>
-      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-        Add A Receipt
+      <Button
+        color="secondary"
+        aria-describedby={id}
+        variant="contained"
+        onClick={handleClick}
+      >
+        Add A Business
       </Button>
       <Popover
         id={id}
@@ -69,10 +74,14 @@ export default function BusinessFormPopOver({
               onChange={(e) => handleChange(e)}
             />
             {error ? <ErrorInputDiv> {error.errors[0]}</ErrorInputDiv> : null}
-            <Button type="submit" variant="contained">
+            <Button color="secondary" type="submit" variant="contained">
               Add a business
             </Button>
-            <Button variant="contained" onClick={handleCancelClick}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={handleCancelClick}
+            >
               Cancel
             </Button>
           </BusniessForm>

@@ -27,7 +27,6 @@ export default function ReceiptFormPopOver({
     setAnchorEl(event.currentTarget);
   };
 
-
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
@@ -35,10 +34,15 @@ export default function ReceiptFormPopOver({
     setAnchorEl(null);
     setError([]);
   }
-  
+
   return (
     <div>
-      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+      <Button
+        color="secondary"
+        aria-describedby={id}
+        variant="contained"
+        onClick={handleClick}
+      >
         Add A Receipt
       </Button>
       <Popover
@@ -89,10 +93,19 @@ export default function ReceiptFormPopOver({
                 accept="image"
                 placeholder="image"
               />
-              <Button variant="contained" type="submit" value="Add Receipt">
+              <Button
+                color="secondary"
+                variant="contained"
+                type="submit"
+                value="Add Receipt"
+              >
                 Add receipt
               </Button>
-              <Button variant="contained" onClick={handleCancelClick}>
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={handleCancelClick}
+              >
                 Cancel
               </Button>
             </ReceiptForm>

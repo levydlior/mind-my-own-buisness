@@ -3,16 +3,15 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import styled from "@emotion/styled";
 
-
 const DeleteDiv = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const ConfirmButtonsDiv = styled.div`
-display: flex
-`
+  display: flex;
+`;
 
 const style = {
   position: "absolute",
@@ -28,15 +27,15 @@ const style = {
 export default function DeleteBusinessDialog({
   deleteBusinessActive,
   onClosing,
-  onDeleteBusiness
+  onDeleteBusiness,
 }) {
   const handleClose = (e) => {
     e.stopPropagation();
     onClosing(e);
   };
 
-  function handleBusinessDelete(){
-    onDeleteBusiness()
+  function handleBusinessDelete() {
+    onDeleteBusiness();
   }
 
   return (
@@ -48,14 +47,18 @@ export default function DeleteBusinessDialog({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} id="targetDetail">
-            <h2>This will delete the business and all its associated receipts</h2>
-            <DeleteDiv>
+          <h2>This will delete the business and all its associated receipts</h2>
+          <DeleteDiv>
             <h3>Are You Sure?</h3>
             <ConfirmButtonsDiv>
-            <Button onClick={handleBusinessDelete}>Yes</Button>
-            <Button onClick={handleClose}>No</Button>
+              <Button color="secondary" onClick={handleBusinessDelete}>
+                Yes
+              </Button>
+              <Button color="secondary" onClick={handleClose}>
+                No
+              </Button>
             </ConfirmButtonsDiv>
-            </DeleteDiv>
+          </DeleteDiv>
         </Box>
       </Modal>
     </div>

@@ -3,17 +3,17 @@ import Button from "@mui/material/Button";
 import styled from "@emotion/styled";
 
 const Image = styled.img`
-width: 35rem;
-height: 34rem;
-`
+  width: 35rem;
+  height: 34rem;
+`;
 
 const ReceiptDiv = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100%;
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
 
 function ReceiptCard({ receipt, onReceiptDelete }) {
   const storage = getStorage();
@@ -41,7 +41,14 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
     <ReceiptDiv>
       <h2>{receipt.name}</h2>
       <Image src={receipt.image} alt="receipt image" />
-      <Button sx={{marginTop: '0.5rem'}}variant="contained" onClick={handleClick}>Delete</Button>
+      <Button
+        color="secondary"
+        sx={{ marginTop: "0.5rem" }}
+        variant="contained"
+        onClick={handleClick}
+      >
+        Delete
+      </Button>
       <h3>Amount: ${receipt.amount}</h3>
     </ReceiptDiv>
   );

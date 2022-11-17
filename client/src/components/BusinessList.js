@@ -19,6 +19,9 @@ display: flex;
 justify-content: space-between;
 flex-direction: column;
 height: 489px;
+border: solid 1px;
+padding: 20px;
+border-radius: 20px
 `
 
 function BusinessList({ loggedUser, onLinkClick, newReceipt }) {

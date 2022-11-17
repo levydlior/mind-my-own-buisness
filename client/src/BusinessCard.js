@@ -9,6 +9,7 @@ const BusinessLi = styled.li`
   display: flex;
   liststyle: none;
   margin-top: 2rem;
+  border-bottom: solid 1px;
 `;
 
 const StyledIcon = styled(DeleteIcon)`
@@ -57,6 +58,8 @@ function BusinessCard({ business, onHandleLinkClick, onDelete }) {
    
   return (
     <BusinessLi key={business.id}>
+            <StyledIcon fontSize="small" onClick={handleDeleteClick} />
+
       <NavLink
         activeClassName="selected"
         to={`/businesses/${business.id}`}
@@ -64,7 +67,6 @@ function BusinessCard({ business, onHandleLinkClick, onDelete }) {
       >
         {business.name}
       </NavLink>
-      <StyledIcon fontSize="small" onClick={handleDeleteClick} />
       {!deleteBusinessActive? null : <DeleteBusinessDialog  deleteBusinessActive={deleteBusinessActive} onClosing={handleCloseDelete} onDeleteBusiness={handleDelete}/>}
     </BusinessLi>
   );
