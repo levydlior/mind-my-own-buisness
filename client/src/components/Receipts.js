@@ -19,9 +19,9 @@ const NameAndButton = styled.div`
 
 const ReceiptsDiv = styled.div`
   padding-inline: 2rem;
-  width: 622px;
+  width: 80%;
   border: solid 1px;
-  margin-left: 20rem;
+  margin-left: 35px;
   border-radius: 20px;
   box-shadow: 10px 10px 5px lightblue;
 `;
@@ -179,7 +179,7 @@ function Receipts({
       {!createReceiptsActive ? (
         <NameAndButton>
           {receipts.length > 0 ? (
-            <h2>{receipts[0].business.name}</h2>
+            <h2>Business: {receipts[0].business.name}</h2>
           ) : (
             <h2>No Receipts Yet</h2>
           )}

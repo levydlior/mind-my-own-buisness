@@ -14,7 +14,6 @@ const ReceiptDiv = styled.div`
   align-items: center;
   width: 100%;
   border-radius: 20px;
-  border: solid 1px;
   padding: 10px;
   margin-bottom: 20px;
   box-shadow: 10px 10px 5px lightblue;
