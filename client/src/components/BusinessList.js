@@ -3,6 +3,8 @@ import { useHistory } from "react-router";
 import BusinessCard from "../BusinessCard";
 import CreateNewBusiness from "./CreateNewBusiness";
 import styled from "@emotion/styled";
+import { Divider } from "@mui/material";
+
 
 const BusinessUl = styled.ul`
   display: flex;
@@ -21,7 +23,8 @@ flex-direction: column;
 height: 489px;
 border: solid 1px;
 padding: 20px;
-border-radius: 20px
+border-radius: 20px;
+box-shadow: 10px 10px 5px lightblue;
 `
 
 function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
@@ -62,12 +65,16 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
 
   const businessList = businesses.map((business) => {
     return (
+      <>
       <BusinessCard
         business={business}
         onHandleLinkClick={handleLinkClick}
         onDelete={handleDelete}
         key={business.id}
       />
+      <Divider variant="middle" color="black"/>
+      </>
+
     );
   });
 

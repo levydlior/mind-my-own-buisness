@@ -42,6 +42,7 @@ export default function ReceiptFormPopOver({
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
+        sx={{ "text-transform": "none" }}
       >
         Add A Receipt
       </Button>
@@ -94,6 +95,7 @@ export default function ReceiptFormPopOver({
                 placeholder="image"
               />
               <Button
+                sx={{ "text-transform": "none" }}
                 color="secondary"
                 variant="contained"
                 type="submit"
@@ -102,6 +104,7 @@ export default function ReceiptFormPopOver({
                 Add receipt
               </Button>
               <Button
+                sx={{ "text-transform": "none" }}
                 color="secondary"
                 variant="contained"
                 onClick={handleCancelClick}

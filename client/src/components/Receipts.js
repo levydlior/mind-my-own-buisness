@@ -20,6 +20,10 @@ const NameAndButton = styled.div`
 const ReceiptsDiv = styled.div`
   padding-inline: 2rem;
   width: 622px;
+  border: solid 1px;
+  margin-left: 20rem;
+  border-radius: 20px;
+  box-shadow: 10px 10px 5px lightblue;
 `;
 
 function Receipts({
@@ -166,11 +170,9 @@ function Receipts({
     handleUpload();
   }
 
-  function handleSearchTextCHange(e) {
-    setSearchText(e.target.value);
-  }
-
-  console.log(anchorEl);
+  // function handleSearchTextCHange(e) {
+  //   setSearchText(e.target.value);
+  // }
 
   return (
     <ReceiptsDiv>

@@ -47,6 +47,7 @@ export default function BusinessFormPopOver({
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
+        sx={{ "text-transform": "none" }}
       >
         Add A Business
       </Button>
@@ -74,10 +75,16 @@ export default function BusinessFormPopOver({
               onChange={(e) => handleChange(e)}
             />
             {error ? <ErrorInputDiv> {error.errors[0]}</ErrorInputDiv> : null}
-            <Button color="secondary" type="submit" variant="contained">
+            <Button
+              color="secondary"
+              type="submit"
+              variant="contained"
+              sx={{ "text-transform": "none" }}
+            >
               Add a business
             </Button>
             <Button
+              sx={{ "text-transform": "none" }}
               color="secondary"
               variant="contained"
               onClick={handleCancelClick}

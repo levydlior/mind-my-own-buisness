@@ -8,8 +8,8 @@ import styled from "@emotion/styled";
 const MainContentDiv = styled.div`
 display: flex;
 flex-direction: row;
-margin-top: 23px;
-
+margin-top: 55px;
+padding-inline: 70px;
 `
 
 function MainContent({ loggedUser }) {

@@ -104,6 +104,7 @@ function CreateAnAccount({ onCreate }: createProps) {
         <TextField name='email' type='text' required id="outlined-basic" label="Email" variant="outlined" value={createAccountForm.email} onChange={handleChange} />
         {specificError('Email has already been taken')}
         <Button color="secondary"
+          sx={{ "text-transform": "none" }}
           type='submit' variant="contained">Create Account</Button>
       </CreateForm>
       <Link to='/login'>Already have an account</Link >

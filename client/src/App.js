@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="App">
       <Header loggedUser={loggedUser} onLogOut={handleLogOut} />
-      <Divider variant="middle" color="black"/>
+        {/* <Divider variant="middle" color="black"/> */}
       {!loggedUser ? (
         <Switch>
           <Route exact path="/">

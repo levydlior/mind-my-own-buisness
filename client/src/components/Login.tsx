@@ -86,7 +86,7 @@ function Login({ onLogin }: loginProps) {
                 <TextField id="outlined-basic" label="Username" variant="outlined" name='username' type='text' required value={loginForm.username} onChange={handleChange} />
                 <TextField name='password' type='password' required id="outlined-basic" label="Password" variant="outlined" value={loginForm.password} onChange={handleChange} />
                 <Button color="secondary"
-                    sx={{ margin: '1rem' }} type='submit' variant="contained">Login</Button>
+                    sx={{ margin: '1rem', "text-transform": "none" }} type='submit' variant="contained" >Login</Button>
                 {errors ? errors.map(err => <p>{err.error}</p>) : null}
             </LoginForm>
             <Link to='/create-account'>Don't have an account</Link>

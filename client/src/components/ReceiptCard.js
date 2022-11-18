@@ -3,8 +3,8 @@ import Button from "@mui/material/Button";
 import styled from "@emotion/styled";
 
 const Image = styled.img`
-  width: 35rem;
-  height: 34rem;
+  width: 90%;
+  height: 80%;
 `;
 
 const ReceiptDiv = styled.div`
@@ -13,6 +13,11 @@ const ReceiptDiv = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  border-radius: 20px;
+  border: solid 1px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 10px 10px 5px lightblue;
 `;
 
 function ReceiptCard({ receipt, onReceiptDelete }) {
@@ -43,7 +48,7 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
       <Image src={receipt.image} alt="receipt image" />
       <Button
         color="secondary"
-        sx={{ marginTop: "0.5rem" }}
+        sx={{ marginTop: "0.5rem", "text-transform": "none" }}
         variant="contained"
         onClick={handleClick}
       >
