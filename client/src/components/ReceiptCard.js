@@ -16,7 +16,6 @@ const ReceiptDiv = styled.div`
   border-radius: 20px;
   padding: 10px;
   margin-bottom: 20px;
-  box-shadow: 10px 10px 5px lightblue;
 `;
 
 function ReceiptCard({ receipt, onReceiptDelete }) {
@@ -42,6 +41,7 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
   }
 
   return (
+    <div>
     <ReceiptDiv>
       <h2>{receipt.name}</h2>
       <Image src={receipt.image} alt="receipt image" />
@@ -55,6 +55,7 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
       </Button>
       <h3>Amount: ${receipt.amount}</h3>
     </ReceiptDiv>
+    </div>
   );
 }
 

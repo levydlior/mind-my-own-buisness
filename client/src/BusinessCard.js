@@ -66,7 +66,7 @@ function BusinessCard({ business, onHandleLinkClick, onDelete }) {
         to={`/businesses/${business.id}`}
         onClick={onHandleLinkClick}
       >
-        {business.name}
+        {business.name.charAt(0).toUpperCase()}{business.name.slice(1)}
       </NavLink>
       {!deleteBusinessActive? null : <DeleteBusinessDialog  deleteBusinessActive={deleteBusinessActive} onClosing={handleCloseDelete} onDeleteBusiness={handleDelete}/>}
     </BusinessLi>

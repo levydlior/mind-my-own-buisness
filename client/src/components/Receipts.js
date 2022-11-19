@@ -6,10 +6,15 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import styled from "@emotion/styled";
 
 import ReceiptFormPopOver from "./ReceiptFormPopOver";
+import CardCollapse from "./CardCollapse";
 
 // const SearchReceiptForm = styled.form`
 //   text-align: center;
 // `;
+
+const ReceiptListContent = styled.div`
+margin-bottom: 20px;
+`
 
 const NameAndButton = styled.div`
   display: flex;
@@ -114,11 +119,14 @@ function Receipts({
   );
 
   const receiptsList = filterReceiptsList.map((receipt) => (
-    <ReceiptCard
+    <ReceiptListContent>
+    <CardCollapse
+      sx={{ margin: "1px" }}
       key={receipt.name}
       receipt={receipt}
       onReceiptDelete={handleReceiptDelete}
     />
+    </ReceiptListContent>
   ));
 
   function handleChange(e) {
@@ -211,7 +219,7 @@ function Receipts({
           onChange={handleSearchTextCHange}
         />
       </SearchReceiptForm> */}
-      {receiptsList}
+     {receiptsList}
     </ReceiptsDiv>
   );
 }

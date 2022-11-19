@@ -70,7 +70,7 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
         business={business}
         onHandleLinkClick={handleLinkClick}
         onDelete={handleDelete}
-        key={business.id}
+        key={business.name}
       />
       <Divider variant="middle" color="black"/>
       </>
