@@ -22,15 +22,9 @@ align-items: center;
 margin: 2rem;
 `
 
-type createProps = {
-  onCreate: CallableFunction
-}
 
-interface ErrorType {
-  error: String
-}
 
-function CreateAnAccount({ onCreate }: createProps) {
+function CreateAnAccount({ onCreate }) {
 
   const [createAccountForm, setCreateAccountForm] = useState({
     username: '',
@@ -43,18 +37,18 @@ function CreateAnAccount({ onCreate }: createProps) {
     password: '',
     email: ''
   }
-  const [errors, setErrors] = useState<ErrorType[]>([])
+  const [errors, setErrors] = useState([])
 
 
 
-  function handleChange(e: any) {
+  function handleChange(e) {
     const target = e.target.name
     const value = e.target.value
 
     setCreateAccountForm({ ...createAccountForm, [target]: value })
   }
 
-  function handleSubmit(e: React.SyntheticEvent) {
+  function handleSubmit(e) {
     e.preventDefault()
 
     fetch('/users', {
@@ -79,9 +73,9 @@ function CreateAnAccount({ onCreate }: createProps) {
     })
   }
 
-  function specificError(text: string) {
+  function specificError(text) {
     let er;
-    errors.forEach((error: any) => {
+    errors.forEach((error) => {
       if (error === text) {
         er = error;
         return er;

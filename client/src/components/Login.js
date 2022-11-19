@@ -23,25 +23,17 @@ margin: 2rem;
 `
 
 
-type loginProps = {
-    onLogin: CallableFunction
-}
-
-interface ErrorType {
-    error: String
-}
-
-function Login({ onLogin }: loginProps) {
+function Login({onLogin}) {
 
     const [loginForm, setLoginForm] = useState({
         username: '',
         password: ''
     })
-    const [errors, setErrors] = useState<ErrorType[]>([])
+    const [errors, setErrors] = useState([])
 
-    function handleChange(e: any) {
-        const target: string = e.target.name
-        const value: string = e.target.value
+    function handleChange(e) {
+        const target = e.target.name
+        const value  = e.target.value
 
         setLoginForm({ ...loginForm, [target]: value })
     }
@@ -49,7 +41,7 @@ function Login({ onLogin }: loginProps) {
     if (errors) {
     }
 
-    function handleLoginSubmit(e: React.SyntheticEvent) {
+    function handleLoginSubmit(e) {
         e.preventDefault()
 
         fetch('/login', {

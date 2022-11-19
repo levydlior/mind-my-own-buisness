@@ -13,7 +13,6 @@ interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
 
-
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -43,8 +42,8 @@ export default function CardCollapse({ receipt, onReceiptDelete }) {
           </CardContent>
           <CardActions disableSpacing>
             <div>
-            <h2>{receipt.name}</h2>
-            <h5 style={{color: 'gray'}}>${receipt.amount}</h5>
+              <h2>{receipt.name}</h2>
+              <h5 style={{ color: "gray" }}>${receipt.amount}</h5>
             </div>
             <ExpandMore
               expand={expanded}
