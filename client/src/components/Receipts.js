@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import ReceiptCard from "./ReceiptCard";
 import storage from "./../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import styled from "@emotion/styled";
+import TextField from "@mui/material/TextField";
 
 import ReceiptFormPopOver from "./ReceiptFormPopOver";
 import CardCollapse from "./CardCollapse";
 
-// const SearchReceiptForm = styled.form`
-//   text-align: center;
-// `;
+const SearchReceiptForm = styled.form`
+  text-align: center;
+`;
 
 const ReceiptListContent = styled.div`
-margin-bottom: 20px;
-`
+  margin-bottom: 20px;
+`;
 
 const NameAndButton = styled.div`
   display: flex;
@@ -45,6 +45,7 @@ function Receipts({
   const [currentBusiness, setCurrentBusiness] = useState(null);
   const [searchText, setSearchText] = useState(``);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [sortByPrice, setSortByPrice] = useState(false);
 
   const params = useParams();
   const { businessId } = params;
@@ -118,17 +119,42 @@ function Receipts({
     rec.name.includes(searchText)
   );
 
-  const receiptsList = filterReceiptsList.map((receipt) => (
-    <ReceiptListContent>
-    <CardCollapse
-      sx={{ margin: "1px" }}
-      key={receipt.name}
-      receipt={receipt}
-      onReceiptDelete={handleReceiptDelete}
-    />
-    </ReceiptListContent>
-  ));
-
+  function receiptsList() {
+    if (sortByPrice) {
+      return sortPrices().map((receipt) => (
+        <ReceiptListContent>
+          <CardCollapse
+            sx={{ margin: "1px" }}
+            key={receipt.name}
+            receipt={receipt}
+            onReceiptDelete={handleReceiptDelete}
+          />
+        </ReceiptListContent>
+      ));
+    } else {
+      return filterReceiptsList.map((receipt) => (
+        <ReceiptListContent>
+          <CardCollapse
+            sx={{ margin: "1px" }}
+            key={receipt.name}
+            receipt={receipt}
+            onReceiptDelete={handleReceiptDelete}
+          />
+        </ReceiptListContent>
+      ));
+    }
+  }
+  // const receiptsList = filterReceiptsList.map((receipt) => (
+  //   <ReceiptListContent>
+  //     <CardCollapse
+  //       sx={{ margin: "1px" }}
+  //       key={receipt.name}
+  //       receipt={receipt}
+  //       onReceiptDelete={handleReceiptDelete}
+  //     />
+  //   </ReceiptListContent>
+  // ));
+  console.log(receiptsList());
   function handleChange(e) {
     const target = e.target.name;
     const value = e.target.value;
@@ -178,9 +204,16 @@ function Receipts({
     handleUpload();
   }
 
-  // function handleSearchTextCHange(e) {
-  //   setSearchText(e.target.value);
-  // }
+  function handleSearchTextCHange(e) {
+    setSearchText(e.target.value);
+  }
+
+  function sortPrices() {
+    const sortedList = filterReceiptsList.sort((a, b) =>
+      a.amount > b.amount ? 1 : -1
+    );
+    return sortedList;
+  }
 
   return (
     <ReceiptsDiv>
@@ -206,7 +239,7 @@ function Receipts({
         </NameAndButton>
       ) : null}
 
-      {/* <SearchReceiptForm>
+      <SearchReceiptForm>
         <h3>Find A Receipt By Name:</h3>
         <TextField
           size="small"
@@ -218,8 +251,15 @@ function Receipts({
           value={searchText}
           onChange={handleSearchTextCHange}
         />
-      </SearchReceiptForm> */}
-     {receiptsList}
+      </SearchReceiptForm>
+      <h3>Sort by:</h3>
+      <p>Cost:</p>
+      <input
+        type="radio"
+        checked={sortByPrice ? true : false}
+        onClick={() => setSortByPrice(!sortByPrice)}
+      />
+      {receiptsList()}
     </ReceiptsDiv>
   );
 }
