@@ -4,9 +4,9 @@ import storage from "./../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import styled from "@emotion/styled";
 import TextField from "@mui/material/TextField";
-
 import ReceiptFormPopOver from "./ReceiptFormPopOver";
 import CardCollapse from "./CardCollapse";
+import Sort from "./Sort";
 
 const SearchReceiptForm = styled.form`
   text-align: center;
@@ -29,6 +29,18 @@ const ReceiptsDiv = styled.div`
   margin-left: 35px;
   border-radius: 20px;
   box-shadow: 10px 10px 5px lightblue;
+`;
+
+const SortDiv = styled.div`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const RadioSortDiv = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 function Receipts({
@@ -120,6 +132,13 @@ function Receipts({
   );
 
   function receiptsList() {
+    function sortPrices() {
+      const sortedList = filterReceiptsList.sort((a, b) =>
+        a.amount > b.amount ? 1 : -1
+      );
+      return sortedList;
+    }
+
     if (sortByPrice) {
       return sortPrices().map((receipt) => (
         <ReceiptListContent>
@@ -144,17 +163,7 @@ function Receipts({
       ));
     }
   }
-  // const receiptsList = filterReceiptsList.map((receipt) => (
-  //   <ReceiptListContent>
-  //     <CardCollapse
-  //       sx={{ margin: "1px" }}
-  //       key={receipt.name}
-  //       receipt={receipt}
-  //       onReceiptDelete={handleReceiptDelete}
-  //     />
-  //   </ReceiptListContent>
-  // ));
-  console.log(receiptsList());
+
   function handleChange(e) {
     const target = e.target.name;
     const value = e.target.value;
@@ -208,13 +217,6 @@ function Receipts({
     setSearchText(e.target.value);
   }
 
-  function sortPrices() {
-    const sortedList = filterReceiptsList.sort((a, b) =>
-      a.amount > b.amount ? 1 : -1
-    );
-    return sortedList;
-  }
-
   return (
     <ReceiptsDiv>
       {!createReceiptsActive ? (
@@ -238,7 +240,6 @@ function Receipts({
           />
         </NameAndButton>
       ) : null}
-
       <SearchReceiptForm>
         <h3>Find A Receipt By Name:</h3>
         <TextField
@@ -252,13 +253,7 @@ function Receipts({
           onChange={handleSearchTextCHange}
         />
       </SearchReceiptForm>
-      <h3>Sort by:</h3>
-      <p>Cost:</p>
-      <input
-        type="radio"
-        checked={sortByPrice ? true : false}
-        onClick={() => setSortByPrice(!sortByPrice)}
-      />
+      <Sort sortByPrice={sortByPrice} setSortByPrice={setSortByPrice} />
       {receiptsList()}
     </ReceiptsDiv>
   );
