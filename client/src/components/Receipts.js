@@ -31,18 +31,6 @@ const ReceiptsDiv = styled.div`
   box-shadow: 10px 10px 5px lightblue;
 `;
 
-const SortDiv = styled.div`
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-const RadioSortDiv = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 function Receipts({
   onCreateReceipts,
   createReceiptsActive,
@@ -57,7 +45,7 @@ function Receipts({
   const [currentBusiness, setCurrentBusiness] = useState(null);
   const [searchText, setSearchText] = useState(``);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [sortByPrice, setSortByPrice] = useState(false);
+  const [sortBy, setSortBy] = useState("none");
 
   const params = useParams();
   const { businessId } = params;
@@ -67,6 +55,7 @@ function Receipts({
     amount: "",
     image: "",
     business_id: businessId,
+    date_field: "",
   });
 
   const originalForm = {
@@ -74,6 +63,7 @@ function Receipts({
     amount: "",
     image: "",
     business_id: businessId,
+    date_field: "",
   };
 
   async function handleUpload() {
@@ -126,7 +116,6 @@ function Receipts({
     const updatedReceipts = receipts.filter((receipt) => receipt.id !== id);
     setReceipts(updatedReceipts);
   }
-
   const filterReceiptsList = receipts.filter((rec) =>
     rec.name.includes(searchText)
   );
@@ -138,9 +127,26 @@ function Receipts({
       );
       return sortedList;
     }
+    function sortDates() {
+      const sortedList = filterReceiptsList.sort((a, b) =>
+        a.date_field > b.date_field ? 1 : -1
+      );
+      return sortedList;
+    }
 
-    if (sortByPrice) {
+    if (sortBy === "price") {
       return sortPrices().map((receipt) => (
+        <ReceiptListContent>
+          <CardCollapse
+            sx={{ margin: "1px" }}
+            key={receipt.name}
+            receipt={receipt}
+            onReceiptDelete={handleReceiptDelete}
+          />
+        </ReceiptListContent>
+      ));
+    } else if (sortBy === "date") {
+      return sortDates().map((receipt) => (
         <ReceiptListContent>
           <CardCollapse
             sx={{ margin: "1px" }}
@@ -237,23 +243,30 @@ function Receipts({
             setAnchorEl={setAnchorEl}
             anchorEl={anchorEl}
             setError={setError}
+            setReceiptForm={setReceiptForm}
+            originalForm={originalForm}
           />
         </NameAndButton>
       ) : null}
-      <SearchReceiptForm>
-        <h3>Find A Receipt By Name:</h3>
-        <TextField
-          size="small"
-          id="outlined-basic"
-          label="Find A Receipt"
-          variant="outlined"
-          type="test"
-          required
-          value={searchText}
-          onChange={handleSearchTextCHange}
-        />
-      </SearchReceiptForm>
-      <Sort sortByPrice={sortByPrice} setSortByPrice={setSortByPrice} />
+      {receipts.length > 0 ? (
+        <>
+          <SearchReceiptForm>
+            <h3>Find A Receipt By Name:</h3>
+            <TextField
+              size="small"
+              id="outlined-basic"
+              label="Find A Receipt"
+              variant="outlined"
+              type="test"
+              required
+              value={searchText}
+              onChange={handleSearchTextCHange}
+            />
+          </SearchReceiptForm>
+          <Sort sortBy={sortBy} setSortBy={setSortBy} />
+        </>
+      ) : null}
+
       {receiptsList()}
     </ReceiptsDiv>
   );

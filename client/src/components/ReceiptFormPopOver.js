@@ -22,6 +22,8 @@ export default function ReceiptFormPopOver({
   anchorEl,
   setAnchorEl,
   setError,
+  setReceiptForm,
+  originalForm
 }) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,6 +35,7 @@ export default function ReceiptFormPopOver({
   function handleCancelClick() {
     setAnchorEl(null);
     setError([]);
+    setReceiptForm(originalForm)
   }
 
   return (
@@ -82,6 +85,18 @@ export default function ReceiptFormPopOver({
                 required
                 value={receiptForm.amount}
                 onChange={(e) => handleChange(e)}
+              />
+              <TextField
+                size="small"
+                id="outlined-basic"
+                label="Date"
+                variant="outlined"
+                name="date_field"
+                type="date"
+                required
+                value={receiptForm.date_field}
+                onChange={(e) => handleChange(e)}
+                InputLabelProps={{ shrink: true }}
               />
               <TextField
                 size="small"

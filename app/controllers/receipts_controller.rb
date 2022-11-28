@@ -21,7 +21,7 @@ class ReceiptsController < ApplicationController
     private
 
         def receipt_params
-            params.permit(:name, :amount, :image, :business_id)
+            params.permit(:name, :amount, :image, :business_id, :date_field)
         end
 
 end

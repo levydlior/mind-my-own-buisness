@@ -44,6 +44,7 @@ export default function CardCollapse({ receipt, onReceiptDelete }) {
             <div>
               <h2>{receipt.name}</h2>
               <h5 style={{ color: "gray" }}>${receipt.amount}</h5>
+              <h5 style={{ color: "gray" }}>{receipt.date_field}</h5>
             </div>
             <ExpandMore
               expand={expanded}
