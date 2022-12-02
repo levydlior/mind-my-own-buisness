@@ -1,0 +1,22 @@
+{
+  "name": "mind-my-own-buisness",
+  "version": "1.0.0",
+  "description": "The platform for business owners to track and keep their receipts",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/levydlior/mind-my-own-buisness.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/levydlior/mind-my-own-buisness/issues"
+  },
+  "homepage": "https://github.com/levydlior/mind-my-own-buisness#readme"
+}
