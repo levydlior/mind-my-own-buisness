@@ -33,7 +33,6 @@ function BusinessCard({ business, onHandleLinkClick, onDelete }) {
 
       deleteObject(desertRef)
         .then(() => {
-          console.log("done");
         })
         .catch((error) => {
           console.log(error);

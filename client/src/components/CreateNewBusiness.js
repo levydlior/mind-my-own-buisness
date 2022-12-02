@@ -1,14 +1,8 @@
 import { useState } from "react";
-import styled from "@emotion/styled";
 
 import BusinessFormPopOver from "./BusinessFormPopOver";
 
-function CreateNewBusiness({
-  loggedUser,
-  active,
-  handleActiveChange,
-  onAddBusiness,
-}) {
+function CreateNewBusiness({ loggedUser, onAddBusiness }) {
   const id = loggedUser.id;
   const [businessForm, setBusinessForm] = useState({
     name: "",

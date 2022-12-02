@@ -5,7 +5,6 @@ import CreateNewBusiness from "./CreateNewBusiness";
 import styled from "@emotion/styled";
 import { Divider } from "@mui/material";
 
-
 const BusinessUl = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -17,21 +16,21 @@ const BusinessUl = styled.ul`
 `;
 
 const BusinessAreaDiv = styled.div`
-display: flex;
-justify-content: space-between;
-flex-direction: column;
-height: 489px;
-border: solid 1px;
-padding: 20px;
-border-radius: 20px;
-box-shadow: 10px 10px 5px lightblue;
-`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 489px;
+  border: solid 1px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 5px lightblue;
+`;
 
 function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
   const [businesses, setBusinesses] = useState([]);
-  const [active, setActive] = useState(false);
 
   const history = useHistory();
+
   useEffect(() => {
     fetch("/businesses")
       .then((r) => r.json())
@@ -40,18 +39,12 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
       });
   }, [newReceipt]);
 
-  function handleActiveChange(value) {
-    setActive(value);
-  }
-
   function handleLinkClick() {
-    setActive(false);
     onLinkClick(false);
   }
 
   function handleAddBusiness(business) {
     setBusinesses([...businesses, business]);
-    setActive(false);
   }
 
   function handleDelete(business) {
@@ -66,15 +59,14 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
   const businessList = businesses.map((business) => {
     return (
       <>
-      <BusinessCard
-        business={business}
-        onHandleLinkClick={handleLinkClick}
-        onDelete={handleDelete}
-        key={business.name}
-      />
-      <Divider variant="middle" color="black"/>
+        <BusinessCard
+          business={business}
+          onHandleLinkClick={handleLinkClick}
+          onDelete={handleDelete}
+          key={business.name}
+        />
+        <Divider variant="middle" color="black" />
       </>
-
     );
   });
 
@@ -86,8 +78,6 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
       </BusinessUl>
       <CreateNewBusiness
         loggedUser={loggedUser}
-        active={active}
-        handleActiveChange={handleActiveChange}
         onAddBusiness={handleAddBusiness}
       />
     </BusinessAreaDiv>

@@ -42,19 +42,19 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
 
   return (
     <div>
-    <ReceiptDiv>
-      <h2>{receipt.name}</h2>
-      <Image src={receipt.image} alt="receipt image" />
-      <Button
-        color="secondary"
-        sx={{ marginTop: "0.5rem", "text-transform": "none" }}
-        variant="contained"
-        onClick={handleClick}
-      >
-        Delete
-      </Button>
-      <h3>Amount: ${receipt.amount}</h3>
-    </ReceiptDiv>
+      <ReceiptDiv>
+        <h2>{receipt.name}</h2>
+        <Image src={receipt.image} alt="receipt image" />
+        <Button
+          color="secondary"
+          sx={{ marginTop: "0.5rem", "text-transform": "none" }}
+          variant="contained"
+          onClick={handleClick}
+        >
+          Delete
+        </Button>
+        <h3>Amount: ${receipt.amount}</h3>
+      </ReceiptDiv>
     </div>
   );
 }

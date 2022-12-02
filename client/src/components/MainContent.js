@@ -1,16 +1,15 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Route, useRouteMatch } from "react-router";
 import BusinessList from "./BusinessList";
 import Receipts from "./Receipts";
 import styled from "@emotion/styled";
 
-
 const MainContentDiv = styled.div`
-display: flex;
-flex-direction: row;
-margin-top: 55px;
-padding-inline: 70px;
-`
+  display: flex;
+  flex-direction: row;
+  margin-top: 55px;
+  padding-inline: 70px;
+`;
 
 function MainContent({ loggedUser }) {
   const match = useRouteMatch();
@@ -24,7 +23,7 @@ function MainContent({ loggedUser }) {
   function handleNewReceipts(res) {
     setNewReceipt(res);
   }
-  
+
   return (
     <MainContentDiv>
       <BusinessList

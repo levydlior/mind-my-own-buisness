@@ -6,7 +6,6 @@ import Login from "./components/Login";
 import MainContent from "./components/MainContent";
 import styled from "@emotion/styled";
 import Header from "./components/Header";
-import { Divider } from "@mui/material";
 
 const WelcomeText = styled.div`
   justify-content: center;
@@ -58,7 +57,7 @@ function App() {
   return (
     <div className="App">
       <Header loggedUser={loggedUser} onLogOut={handleLogOut} />
-        {/* <Divider variant="middle" color="black"/> */}
+      {/* <Divider variant="middle" color="black"/> */}
       {!loggedUser ? (
         <Switch>
           <Route exact path="/">

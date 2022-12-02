@@ -23,7 +23,7 @@ export default function ReceiptFormPopOver({
   setAnchorEl,
   setError,
   setReceiptForm,
-  originalForm
+  originalForm,
 }) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -35,7 +35,7 @@ export default function ReceiptFormPopOver({
   function handleCancelClick() {
     setAnchorEl(null);
     setError([]);
-    setReceiptForm(originalForm)
+    setReceiptForm(originalForm);
   }
 
   return (
