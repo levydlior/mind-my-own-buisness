@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: mind_production
   username: mind
   password: <%= ENV["MIND_DATABASE_PASSWORD"] %>
