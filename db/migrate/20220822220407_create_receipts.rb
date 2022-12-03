@@ -5,7 +5,6 @@ class CreateReceipts < ActiveRecord::Migration[7.0]
       t.integer :amount
       t.string :image
       t.belongs_to :business, null: false, foreign_key: true
-
       t.timestamps
     end
   end
