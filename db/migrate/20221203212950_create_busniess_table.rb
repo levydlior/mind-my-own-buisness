@@ -1,4 +1,4 @@
-class CreateBusniessTable < ActiveRecord::Migration[7.0]
+class CreateBusinessesTable < ActiveRecord::Migration[7.0]
   def change
     create_table :businesses do |t|
     t.string :name
@@ -7,3 +7,4 @@ class CreateBusniessTable < ActiveRecord::Migration[7.0]
     end
   end
 end
+git h
