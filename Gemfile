@@ -46,11 +46,11 @@ group :development do
 end
 
 group :production do
-gem "rack-cors"
 
    gem 'pg'
 end
 
 gem "active_model_serializers", "~> 0.10.13"
 
-# gem 'sprockets-rails'
+  gem "rack-cors"
+  gem 'sprockets-rails'
