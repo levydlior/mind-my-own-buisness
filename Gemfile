@@ -48,7 +48,7 @@ end
 
 group :production do
 
-  #  gem 'sprockets-rails'
+   gem 'sprockets-rails'
    gem 'pg'
 end
 
