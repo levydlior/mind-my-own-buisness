@@ -17,8 +17,6 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -74,12 +72,12 @@ test:
 # URL environment variable explicitly:
 #
 #   production:
+#     url: <%= ENV["MY_APP_DATABASE_URL"] %>
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-    url: <%= ENV["MY_APP_DATABASE_URL"] %>
   <<: *default
   database: mind_production
   username: mind

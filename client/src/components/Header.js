@@ -16,8 +16,7 @@ function Header({ loggedUser, onLogOut }) {
       {loggedUser ? (
         <>
           <NavLink to="/">
-            {" "}
-            <Logo />{" "}
+            <Logo />
           </NavLink>
           <Link to="/" onClick={(e) => onLogOut(e)}>
             Log out
