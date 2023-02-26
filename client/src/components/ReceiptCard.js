@@ -21,11 +21,10 @@ const ReceiptDiv = styled.div`
 function ReceiptCard({ receipt, onReceiptDelete }) {
   const storage = getStorage();
   const desertRef = ref(storage, `${receipt.image}`);
+ 
   function handleClick() {
     deleteObject(desertRef)
       .then(() => {
-        // File deleted successfully
-        console.log("done");
         fetch(`/receipts/${receipt.id}`, {
           method: "DELETE",
         }).then((r) => {
@@ -35,7 +34,6 @@ function ReceiptCard({ receipt, onReceiptDelete }) {
         });
       })
       .catch((error) => {
-        // Uh-oh, an error occurred!
         console.log(error);
       });
   }

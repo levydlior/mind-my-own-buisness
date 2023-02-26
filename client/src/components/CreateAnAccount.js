@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import TextField from "@mui/material/TextField";
@@ -44,7 +44,6 @@ function CreateAnAccount({ onCreate }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     fetch("/users", {
       method: "POST",
       headers: {

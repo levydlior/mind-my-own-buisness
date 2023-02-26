@@ -66,6 +66,19 @@ function Receipts({
     date_field: "",
   };
 
+  
+  useEffect(() => {
+    fetch(`/receipts/${businessId}`)
+      .then((r) => r.json())
+      .then((res) => setReceipts(res));
+
+    fetch(`/businesses/${businessId}`)
+      .then((r) => r.json())
+      .then((fetchedBusiness) => setCurrentBusiness(fetchedBusiness));
+
+    setReceiptForm({ ...receiptForm, business_id: businessId });
+  }, [params]);
+
   async function handleUpload() {
     if (!file) {
       setError("Please add an image");
@@ -87,12 +100,10 @@ function Receipts({
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
 
-        // update progress
         setPercent(percent);
       },
       (err) => setError(err),
       () => {
-        // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           setReceiptForm({ ...receiptForm, image: url });
         });
@@ -100,24 +111,12 @@ function Receipts({
     );
   }
 
-  useEffect(() => {
-    fetch(`/receipts/${businessId}`)
-      .then((r) => r.json())
-      .then((res) => setReceipts(res));
-
-    fetch(`/businesses/${businessId}`)
-      .then((r) => r.json())
-      .then((fetchedBusiness) => setCurrentBusiness(fetchedBusiness));
-
-    setReceiptForm({ ...receiptForm, business_id: businessId });
-  }, [params]);
-
   function handleReceiptDelete(id) {
     const updatedReceipts = receipts.filter((receipt) => receipt.id !== id);
     setReceipts(updatedReceipts);
   }
-  const filterReceiptsList = receipts.filter((rec) =>
-    rec.name.includes(searchText)
+  const filterReceiptsList = receipts.filter((receiptObject) =>
+    receiptObject.name.includes(searchText)
   );
 
   function receiptsList() {
@@ -213,9 +212,9 @@ function Receipts({
   }, [receiptForm.image]);
 
   function handleSubmit(e) {
+    e.preventDefault();
     setUploading(true);
     onCreateReceipts(false);
-    e.preventDefault();
     handleUpload();
   }
 
@@ -232,7 +231,6 @@ function Receipts({
           ) : (
             <h2>No Receipts Yet</h2>
           )}
-
           <ReceiptFormPopOver
             handleImageChange={handleImageChange}
             handleSubmit={handleSubmit}

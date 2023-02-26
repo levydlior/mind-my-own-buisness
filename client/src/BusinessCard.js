@@ -3,14 +3,14 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import DeleteBusinessDialog from './components/DeleteBusinessDialog'
+import DeleteBusinessDialog from "./components/DeleteBusinessDialog";
 
 const BusinessLi = styled.li`
   display: flex;
   liststyle: none;
   // margin-top: 6px;
   // margin-bottom: 6px;
-  margin: 15px 0px 15px 0px
+  margin: 15px 0px 15px 0px;
 `;
 
 const StyledIcon = styled(DeleteIcon)`
@@ -22,23 +22,20 @@ const StyledIcon = styled(DeleteIcon)`
 `;
 
 function BusinessCard({ business, onHandleLinkClick, onDelete }) {
-
-  const [deleteBusinessActive, setDeleteBusinessActive] = useState(false)
+  const [deleteBusinessActive, setDeleteBusinessActive] = useState(false);
 
   async function handleDelete() {
-    setDeleteBusinessActive(false)
+    setDeleteBusinessActive(false);
     const storage = getStorage();
-    const getBusinessFromReceipts = business.receipts.map((receipt) => {
+    const deleteReceiptsFromFirebase = business.receipts.map((receipt) => {
       const desertRef = ref(storage, `${receipt.image}`);
-
       deleteObject(desertRef)
-        .then(() => {
-        })
+        .then(() => {})
         .catch((error) => {
           console.log(error);
         });
     });
-    await getBusinessFromReceipts;
+    await deleteReceiptsFromFirebase;
     fetch(`/businesses/${business.id}`, {
       method: "DELETE",
     }).then((r) => {
@@ -48,26 +45,32 @@ function BusinessCard({ business, onHandleLinkClick, onDelete }) {
     });
   }
 
-  function handleDeleteClick(){
-    setDeleteBusinessActive(true)
+  function handleDeleteClick() {
+    setDeleteBusinessActive(true);
   }
 
-  function handleCloseDelete(){
-    setDeleteBusinessActive(false)
+  function handleCloseDelete() {
+    setDeleteBusinessActive(false);
   }
-   
+
   return (
     <BusinessLi key={business.id}>
-            <StyledIcon fontSize="small" onClick={handleDeleteClick} />
-
+      <StyledIcon fontSize="small" onClick={handleDeleteClick} />
       <NavLink
         activeClassName="selected"
         to={`/businesses/${business.id}`}
         onClick={onHandleLinkClick}
       >
-        {business.name.charAt(0).toUpperCase()}{business.name.slice(1)}
+        {business.name.charAt(0).toUpperCase()}
+        {business.name.slice(1)}
       </NavLink>
-      {!deleteBusinessActive? null : <DeleteBusinessDialog  deleteBusinessActive={deleteBusinessActive} onClosing={handleCloseDelete} onDeleteBusiness={handleDelete}/>}
+      {!deleteBusinessActive ? null : (
+        <DeleteBusinessDialog
+          deleteBusinessActive={deleteBusinessActive}
+          onClosing={handleCloseDelete}
+          onDeleteBusiness={handleDelete}
+        />
+      )}
     </BusinessLi>
   );
 }
