@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Link, Route, Switch, useHistory } from "react-router-dom";
-import CreateAnAccount from "./components/CreateAnAccount";
+import CreateAnAccount from "./components/CreateAnAccount/CreateAnAccount";
 import Login from "./components/Login/Login";
 import MainContent from "./components/MainContent";
 import styled from "@emotion/styled";
