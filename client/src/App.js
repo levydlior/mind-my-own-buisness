@@ -5,7 +5,7 @@ import CreateAnAccount from "./components/CreateAnAccount/CreateAnAccount";
 import Login from "./components/Login/Login";
 import MainContent from "./components/MainContent";
 import styled from "@emotion/styled";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 
 const WelcomeText = styled.div`
   justify-content: center;
