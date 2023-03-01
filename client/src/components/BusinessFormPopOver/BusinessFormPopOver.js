@@ -1,21 +1,13 @@
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import styled from "@emotion/styled";
+import {
+  BusinessForm,
+  ErrorInputDiv,
+  PopOverButton,
+} from "./BusinessFormPopOver.styles";
 
-const BusniessForm = styled.form`
-  display: flex;
-  justify-content: space-between;
-  width: 40rem;
-  flex-wrap: wrap;
-`;
-const ErrorInputDiv = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export default function BusinessFormPopOver({
+export const BusinessFormPopOver = ({
   anchorEl,
   setAnchorEl,
   handleSubmit,
@@ -23,7 +15,7 @@ export default function BusinessFormPopOver({
   handleChange,
   error,
   setError,
-}) {
+}) => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -35,22 +27,21 @@ export default function BusinessFormPopOver({
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  function handleCancelClick() {
+  const handleCancelClick = () => {
     setAnchorEl(null);
     setError(null);
-  }
+  };
 
   return (
     <div>
-      <Button
+      <PopOverButton
         color="secondary"
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
-        sx={{ "text-transform": "none" }}
       >
         Add A Business
-      </Button>
+      </PopOverButton>
       <Popover
         id={id}
         open={open}
@@ -62,7 +53,7 @@ export default function BusinessFormPopOver({
         }}
       >
         <Typography sx={{ p: 2 }}>
-          <BusniessForm onSubmit={(e) => handleSubmit(e)}>
+          <BusinessForm onSubmit={(e) => handleSubmit(e)}>
             <TextField
               size="small"
               id="outlined-basic"
@@ -74,26 +65,20 @@ export default function BusinessFormPopOver({
               value={businessForm.name}
               onChange={(e) => handleChange(e)}
             />
-            {error ? <ErrorInputDiv> {error.errors[0]}</ErrorInputDiv> : null}
-            <Button
-              color="secondary"
-              type="submit"
-              variant="contained"
-              sx={{ "text-transform": "none" }}
-            >
+            {error && <ErrorInputDiv> {error.errors[0]}</ErrorInputDiv>}
+            <PopOverButton color="secondary" type="submit" variant="contained">
               Add a business
-            </Button>
-            <Button
-              sx={{ "text-transform": "none" }}
+            </PopOverButton>
+            <PopOverButton
               color="secondary"
               variant="contained"
               onClick={handleCancelClick}
             >
               Cancel
-            </Button>
-          </BusniessForm>
+            </PopOverButton>
+          </BusinessForm>
         </Typography>
       </Popover>
     </div>
   );
-}
+};

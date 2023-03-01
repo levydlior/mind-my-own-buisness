@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import BusinessFormPopOver from "./BusinessFormPopOver";
+import {BusinessFormPopOver} from "./BusinessFormPopOver/BusinessFormPopOver";
 
 function CreateNewBusiness({ loggedUser, onAddBusiness }) {
   const id = loggedUser.id;
