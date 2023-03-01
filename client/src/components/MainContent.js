@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Route, useRouteMatch } from "react-router";
-import BusinessList from "./BusinessList";
+import BusinessList from "./BusinessList/BusinessList";
 import Receipts from "./Receipts";
 import styled from "@emotion/styled";
 
