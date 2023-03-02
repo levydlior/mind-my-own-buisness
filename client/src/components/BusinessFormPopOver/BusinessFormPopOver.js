@@ -65,7 +65,7 @@ export const BusinessFormPopOver = ({
               value={businessForm.name}
               onChange={(e) => handleChange(e)}
             />
-            {error && <ErrorInputDiv> {error.errors[0]}</ErrorInputDiv>}
+            
             <PopOverButton color="secondary" type="submit" variant="contained">
               Add a business
             </PopOverButton>
@@ -76,6 +76,7 @@ export const BusinessFormPopOver = ({
             >
               Cancel
             </PopOverButton>
+            {error && <ErrorInputDiv> {error.errors[0]}</ErrorInputDiv>}
           </BusinessForm>
         </Typography>
       </Popover>
