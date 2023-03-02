@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route, useRouteMatch } from "react-router";
 import BusinessList from "./BusinessList/BusinessList";
-import Receipts from "./Receipts";
+import Receipts from "./Receipts/Receipts";
 import styled from "@emotion/styled";
 
 const MainContentDiv = styled.div`
