@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import storage from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import TextField from "@mui/material/TextField";
-import ReceiptFormPopOver from "../ReceiptFormPopOver";
+import {ReceiptFormPopOver} from "../ReceiptFormPopOver/ReceiptFormPopOver";
 import CardCollapse from "../CardCollapse";
 import Sort from "../Sort";
 import {

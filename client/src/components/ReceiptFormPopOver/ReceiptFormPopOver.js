@@ -1,18 +1,12 @@
-import { useState } from "react";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import styled from "@emotion/styled";
+import {
+  ReceiptForm,
+  ReceiptPopButton,
+  TextFieldReceipt,
+} from "./ReceiptFormPopOver.styles";
 
-const ReceiptForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 300px;
-`;
-
-export default function ReceiptFormPopOver({
+export const ReceiptFormPopOver = ({
   handleImageChange,
   handleSubmit,
   receiptForm,
@@ -24,31 +18,32 @@ export default function ReceiptFormPopOver({
   setError,
   setReceiptForm,
   originalForm,
-}) {
+}) => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const { name, amount, date_field } = receiptForm;
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  function handleCancelClick() {
+  const handleCancelClick = () => {
     setAnchorEl(null);
     setError([]);
     setReceiptForm(originalForm);
-  }
+  };
 
   return (
     <div>
-      <Button
+      <ReceiptPopButton
         color="secondary"
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
-        sx={{ "text-transform": "none" }}
       >
         Add A Receipt
-      </Button>
+      </ReceiptPopButton>
       <Popover
         id={id}
         open={open}
@@ -63,7 +58,7 @@ export default function ReceiptFormPopOver({
             <h3>Uploading!</h3>
           ) : (
             <ReceiptForm onSubmit={(e) => handleSubmit(e)}>
-              <TextField
+              <TextFieldReceipt
                 size="small"
                 id="outlined-basic"
                 label="Receipt Name"
@@ -71,11 +66,11 @@ export default function ReceiptFormPopOver({
                 name="name"
                 type="text"
                 required
-                value={receiptForm.name}
+                value={name}
                 onChange={(e) => handleChange(e)}
               />
-              {error.length > 0 ? <p>{error}</p> : null}
-              <TextField
+              {error.length > 0 && <p>{error}</p>}
+              <TextFieldReceipt
                 size="small"
                 id="outlined-basic"
                 label="Amount"
@@ -83,10 +78,13 @@ export default function ReceiptFormPopOver({
                 name="amount"
                 type="number"
                 required
-                value={receiptForm.amount}
+                inputProps={{
+                  min: 0,
+                }}
+                value={amount}
                 onChange={(e) => handleChange(e)}
               />
-              <TextField
+              <TextFieldReceipt
                 size="small"
                 id="outlined-basic"
                 label="Date"
@@ -94,11 +92,11 @@ export default function ReceiptFormPopOver({
                 name="date_field"
                 type="date"
                 required
-                value={receiptForm.date_field}
+                value={date_field}
                 onChange={(e) => handleChange(e)}
                 InputLabelProps={{ shrink: true }}
               />
-              <TextField
+              <TextFieldReceipt
                 size="small"
                 id="outlined-basic"
                 variant="outlined"
@@ -109,27 +107,25 @@ export default function ReceiptFormPopOver({
                 accept="image"
                 placeholder="image"
               />
-              <Button
-                sx={{ "text-transform": "none" }}
+              <ReceiptPopButton
                 color="secondary"
                 variant="contained"
                 type="submit"
                 value="Add Receipt"
               >
                 Add receipt
-              </Button>
-              <Button
-                sx={{ "text-transform": "none" }}
+              </ReceiptPopButton>
+              <ReceiptPopButton
                 color="secondary"
                 variant="contained"
                 onClick={handleCancelClick}
               >
                 Cancel
-              </Button>
+              </ReceiptPopButton>
             </ReceiptForm>
           )}
         </Typography>
       </Popover>
     </div>
   );
-}
+};
