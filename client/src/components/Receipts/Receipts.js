@@ -59,7 +59,7 @@ const Receipts = ({
     );
   }, [params]);
 
-  async function handleUpload() {
+  const handleUpload = async () => {
     if (!file) {
       setError("Please add an image");
       return;
@@ -71,6 +71,7 @@ const Receipts = ({
         receiptForm.name
       }/${Date.now()}`
     );
+
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -89,7 +90,7 @@ const Receipts = ({
         });
       }
     );
-  }
+  };
 
   const handleReceiptDelete = (id) => {
     const updatedReceipts = receipts.filter((receipt) => receipt.id !== id);
