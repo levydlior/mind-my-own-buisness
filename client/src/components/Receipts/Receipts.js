@@ -5,7 +5,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import TextField from "@mui/material/TextField";
 import {ReceiptFormPopOver} from "../ReceiptFormPopOver/ReceiptFormPopOver";
 import {CardCollapse} from "../CardCollapse/CardCollapse";
-import Sort from "../Sort";
+import Sort from "../Sort/Sort";
 import {
   SearchReceiptForm,
   ReceiptListContent,

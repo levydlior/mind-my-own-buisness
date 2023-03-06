@@ -1,29 +1,10 @@
-import styled from "@emotion/styled";
+import { SortDiv, RadioSortDiv, SortRadioList } from "./Sort.styles";
 
-const SortDiv = styled.div`
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const RadioSortDiv = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const SortRadioList = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 30%;
-`;
-
-function Sort({ sortBy, setSortBy }) {
-  function handleSortClick(e) {
+const Sort = ({ sortBy, setSortBy }) => {
+  const handleSortClick = (e) => {
     const name = e.target.name;
     setSortBy(name);
-  }
+  };
 
   return (
     <SortDiv>
@@ -59,6 +40,6 @@ function Sort({ sortBy, setSortBy }) {
       </SortRadioList>
     </SortDiv>
   );
-}
+};
 
 export default Sort;
