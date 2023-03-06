@@ -1,61 +1,41 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Link, Route, Switch, useHistory } from "react-router-dom";
-import CreateAnAccount from "./components/CreateAnAccount/CreateAnAccount";
-import Login from "./components/Login/Login";
-import MainContent from "./components/MainContent";
-import styled from "@emotion/styled";
-import Header from "./components/Header/Header";
+import CreateAnAccount from "../CreateAnAccount/CreateAnAccount";
+import Login from "../Login/Login";
+import MainContent from "../MainContent/MainContent";
+import Header from "../Header/Header";
+import { WelcomeText } from "./App.styles";
+import { fetchUserRequest, logoutRequest } from "./App.request";
 
-const WelcomeText = styled.div`
-  justify-content: center;
-  text-align: center;
-`;
-
-function App() {
+const App = () => {
   const [loggedUser, setLoggedUser] = useState(null);
   const [authorized, setAuthorized] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    fetch("/users/show").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => {
-          setLoggedUser(user);
-          setAuthorized(true);
-        });
-      } else {
-        setAuthorized(true);
-      }
-    });
+    fetchUserRequest(setLoggedUser, setAuthorized);
   }, []);
 
-  function onLoginOrCreate(user) {
+  const onLoginOrCreate = (user) => {
     setLoggedUser(user);
     setAuthorized(true);
     history.push("/businesses");
     setLoggedUser(user);
-  }
+  };
 
-  function handleLogOut(e) {
+  const handleLogOut = (e) => {
     e.preventDefault();
-    fetch("/logout", {
-      method: "DELETE",
-    }).then((r) => {
-      if (r.ok) {
-        setLoggedUser(null);
-        history.push("/");
-      }
-    });
-  }
+    logoutRequest(setLoggedUser, setAuthorized, history);
+  };
 
   if (!authorized) {
     return <div></div>;
   }
 
   return (
-    <div className="App">
+    <div>
       <Header loggedUser={loggedUser} onLogOut={handleLogOut} />
       {!loggedUser ? (
         <Switch>
@@ -95,6 +75,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;

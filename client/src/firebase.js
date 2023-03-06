@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
-const app = initializeApp( {
+const app = initializeApp({
   apiKey: `${process.env.REACT_APP_API_KEY}`,
   authDomain: "mind-my-own-buiz-images.firebaseapp.com",
   projectId: "mind-my-own-buiz-images",
