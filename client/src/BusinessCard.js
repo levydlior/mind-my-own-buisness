@@ -3,7 +3,7 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import DeleteBusinessDialog from "./components/DeleteBusinessDialog";
+import {DeleteBusinessDialog} from "./components/DeleteBusinessDialog/DeleteBusinessDialog";
 
 const BusinessLi = styled.li`
   display: flex;
