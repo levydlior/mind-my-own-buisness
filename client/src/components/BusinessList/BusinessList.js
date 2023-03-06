@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import BusinessCard from "../../BusinessCard";
+import BusinessCard from "../BusinessCard/BusinessCard";
 import CreateNewBusiness from "../CreateNewBusiness/CreateNewBusiness";
 import { Divider } from "@mui/material";
 import { BusinessUl, BusinessAreaDiv } from "./BusinessList.styles";
