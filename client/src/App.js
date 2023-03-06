@@ -3,7 +3,7 @@ import "./App.css";
 import { Link, Route, Switch, useHistory } from "react-router-dom";
 import CreateAnAccount from "./components/CreateAnAccount/CreateAnAccount";
 import Login from "./components/Login/Login";
-import MainContent from "./components/MainContent";
+import MainContent from "./components/MainContent/MainContent";
 import styled from "@emotion/styled";
 import Header from "./components/Header/Header";
 
