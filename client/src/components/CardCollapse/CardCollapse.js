@@ -7,7 +7,8 @@ import Collapse from "@mui/material/Collapse";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ReceiptCard from "./ReceiptCard";
+import ReceiptCard from "../ReceiptCard";
+import { DetailsTitles, CardReceiptDetails } from "./CardCollapse.styles";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -24,15 +25,16 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-export default function CardCollapse({ receipt, onReceiptDelete }) {
+export const CardCollapse = ({ receipt, onReceiptDelete }) => {
   const [expanded, setExpanded] = React.useState(false);
 
+  const {name, amount, date_field} = receipt
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card sx={{ maxWidth: 1500, borerBottom: "1px" }}>
+    <CardReceiptDetails>
       {!receipt ? (
         <h2>Loading!</h2>
       ) : (
@@ -42,9 +44,9 @@ export default function CardCollapse({ receipt, onReceiptDelete }) {
           </CardContent>
           <CardActions disableSpacing>
             <div>
-              <h2>{receipt.name}</h2>
-              <h5 style={{ color: "gray" }}>${receipt.amount}</h5>
-              <h5 style={{ color: "gray" }}>{receipt.date_field}</h5>
+              <h2>{name}</h2>
+              <DetailsTitles>${amount}</DetailsTitles>
+              <DetailsTitles>{date_field}</DetailsTitles>
             </div>
             <ExpandMore
               expand={expanded}
@@ -67,6 +69,6 @@ export default function CardCollapse({ receipt, onReceiptDelete }) {
           </Collapse>
         </>
       )}
-    </Card>
+    </CardReceiptDetails>
   );
 }
