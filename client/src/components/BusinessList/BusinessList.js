@@ -1,60 +1,36 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import BusinessCard from "../BusinessCard";
-import CreateNewBusiness from "./CreateNewBusiness";
-import styled from "@emotion/styled";
+import BusinessCard from "../BusinessCard/BusinessCard";
+import CreateNewBusiness from "../CreateNewBusiness/CreateNewBusiness";
 import { Divider } from "@mui/material";
+import { BusinessUl, BusinessAreaDiv } from "./BusinessList.styles";
+import { fetchBusinesses } from "./BusinessList.request";
 
-const BusinessUl = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  flex-direction: column;
-  margin: 0rem;
-  padding: 0rem;
-  width: 259px;
-`;
-
-const BusinessAreaDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  height: 489px;
-  border: solid 1px;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 10px 10px 5px lightblue;
-`;
-
-function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
+const BusinessList = ({ loggedUser, onLinkClick, newReceipt }) => {
   const [businesses, setBusinesses] = useState([]);
 
   const history = useHistory();
 
   useEffect(() => {
-    fetch("/businesses")
-      .then((r) => r.json())
-      .then((arrayOfBusinesses) => {
-        setBusinesses(arrayOfBusinesses);
-      });
+    fetchBusinesses(setBusinesses);
   }, [newReceipt]);
 
-  function handleLinkClick() {
+  const handleLinkClick = () => {
     onLinkClick(false);
-  }
+  };
 
-  function handleAddBusiness(business) {
+  const handleAddBusiness = (business) => {
     setBusinesses([...businesses, business]);
-  }
+  };
 
-  function handleDelete(business) {
+  const handleDelete = (business) => {
     const newBusinessArray = businesses.filter(
       (busi) => busi.id !== business.id
     );
 
     setBusinesses(newBusinessArray);
     history.push("/businesses");
-  }
+  };
 
   const businessList = businesses.map((business) => {
     return (
@@ -82,6 +58,6 @@ function BusinessList({ loggedUser, onLinkClick, newReceipt }) {
       />
     </BusinessAreaDiv>
   );
-}
+};
 
 export default BusinessList;

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Link, Route, Switch, useHistory } from "react-router-dom";
-import CreateAnAccount from "./components/CreateAnAccount";
-import Login from "./components/Login";
+import CreateAnAccount from "./components/CreateAnAccount/CreateAnAccount";
+import Login from "./components/Login/Login";
 import MainContent from "./components/MainContent";
 import styled from "@emotion/styled";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 
 const WelcomeText = styled.div`
   justify-content: center;
@@ -57,7 +57,6 @@ function App() {
   return (
     <div className="App">
       <Header loggedUser={loggedUser} onLogOut={handleLogOut} />
-      {/* <Divider variant="middle" color="black"/> */}
       {!loggedUser ? (
         <Switch>
           <Route exact path="/">
